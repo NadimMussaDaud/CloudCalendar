@@ -1,5 +1,9 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+
+
+
 import Exceptions.*;
 
 public class CalendarClass implements Calendar{
@@ -12,9 +16,11 @@ public class CalendarClass implements Calendar{
     }
 
     @Override
-    public void listAccounts() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listAccounts'");
+    public Iterator<Account> listAccounts() throws NoAccountsException {
+        if (accounts.isEmpty()) {
+            throw new NoAccountsException();
+        }
+        return accounts.values().iterator();
     }
 
     @Override
@@ -43,9 +49,5 @@ public class CalendarClass implements Calendar{
         throw new UnsupportedOperationException("Unimplemented method 'create'");
     }
 
-    @Override
-    public boolean hasAccount() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasAccount'");
-    }
+ 
 }

@@ -1,7 +1,9 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
-import dataStructures.*;
 import Exceptions.*;
 
 /**
@@ -15,6 +17,9 @@ public class Main {
     private static final String ACCOUNT_REGISTERED_MESSAGE = "%s was registered.\n";
     private static final String DUPLICATE_ACCOUTN_MESSAGE = "%s already exists.\n";
     private static final String NON_EXISTENT_TYPE_MESSAGE = "Unknown account type.\n";
+    private static final String NO_ACCOUNTS = "No accounts registered.\n";
+    private static final String ALL_ACCOUNTS = "All accounts:\n";
+    private static final String LIST_ACCOUNTS_FORMAT = "%s [%s]\n";
     private static Calendar calendar;
 
     public static void main(String[] args) {
@@ -41,7 +46,7 @@ public class Main {
                 register(in);
                 break;
             case ACCOUNTS:
-                calendar.listAccounts();
+                list();
                 break;
             case CREATE:
                 create(in);
@@ -73,10 +78,23 @@ public class Main {
         }
     }
 
+    private static void list() {
+        try {
+            Iterator<Account> it = calendar.listAccounts();
+            System.out.printf(ALL_ACCOUNTS);
+            while (it.hasNext()) {
+                Account account = it.next();
+                System.out.printf(LIST_ACCOUNTS_FORMAT, account.getName(), account.getType());
+            }
+        } catch (NoAccountsException e) {
+            System.out.printf(NO_ACCOUNTS);
+        }
+    }
+
     private static void topics(Scanner in) {
-    Array<String> topics = new ArrayClass<>();
+    List<String> topics = new ArrayList<>();
        while (in.hasNext()) 
-        topics.insertLast(in.next());
+        topics.add(in.next());
        in.nextLine();
     }
 
@@ -113,9 +131,9 @@ public class Main {
        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd HH");
        LocalDateTime now = LocalDateTime.now();
        String date = now.format(formatter);
-       Array<String> topics = new ArrayClass<>();
+       List<String> topics = new ArrayList<>();
        while (in.hasNext()) 
-        topics.insertLast(in.next());
+        topics.add(in.next());
        in.nextLine();
 
     }

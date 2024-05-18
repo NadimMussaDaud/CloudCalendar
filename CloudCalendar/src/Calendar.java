@@ -1,13 +1,14 @@
+import java.util.Iterator;
+
 import Exceptions.*;
 
 public interface Calendar {
 
-    void listAccounts();
+    Iterator<Account> listAccounts() throws NoAccountsException;
 
     void register(String accountName, String type) throws NonExistentTypeException, DuplicateAccountException;
 
     void create(String accountName, String type);
 
-    boolean hasAccount();
     
 }

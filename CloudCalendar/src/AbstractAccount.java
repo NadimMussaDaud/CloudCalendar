@@ -9,4 +9,6 @@ abstract class AbstractAccount implements Account {
     public String getName() {
         return name;
     }
+
+    public abstract String getType();
 }
