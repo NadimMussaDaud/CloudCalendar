@@ -2,6 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import dataStructures.*;
+import Exceptions.*;
 
 /**
  * Main Skeleton provided by ClaudeAI
@@ -11,6 +12,9 @@ public class Main {
     private static final String INVALID_COMMAND = "Invalid command.";
     private static final String HELP_MESSAGE_FORMAT = "%s - %s\n";
     private static final String QUIT_MESSAGE = "Bye.";
+    private static final String ACCOUNT_REGISTERED_MESSAGE = "%s was registered.\n";
+    private static final String DUPLICATE_ACCOUTN_MESSAGE = "%s already exists.\n";
+    private static final String NON_EXISTENT_TYPE_MESSAGE = "Unknown account type.\n";
     private static Calendar calendar;
 
     public static void main(String[] args) {
@@ -118,22 +122,21 @@ public class Main {
 
     private static void register(Scanner in) {
        String accountName = in.next();
-       String type = in.nextLine();
+       String type = in.nextLine().trim();
 
-       if(!calendar.hasAccount() && isType(type)){
-            calendar.register(accountName,type);
-            System.out.println();
-       }else{
-            System.out.println();
-       }
-
+        try{
+            calendar.register(accountName, type);
+            System.out.printf(ACCOUNT_REGISTERED_MESSAGE,accountName);
+        }
+        catch(DuplicateAccountException e){
+            System.out.printf(DUPLICATE_ACCOUTN_MESSAGE,accountName);
+        }
+        catch(NonExistentTypeException e){
+            System.out.printf(NON_EXISTENT_TYPE_MESSAGE);
+        }
+        
     }
 
-    private static boolean isType(String type) {
-       return (type.equals("staff") ||
-              type.equals("manager") ||
-              type.equals("guest"));
-    }
 
     private static void help() {
         for (Commands command : Commands.values()) {
