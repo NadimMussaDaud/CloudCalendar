@@ -8,4 +8,5 @@
     public String getType() {
         return "staff";
     }
+
 }

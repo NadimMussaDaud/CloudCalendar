@@ -8,4 +8,5 @@ public class ManagerAccount extends AbstractAccount {
     public String getType() {
         return "manager";
     }
+
 }
