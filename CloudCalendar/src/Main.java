@@ -11,6 +11,7 @@ import Exceptions.*;
  */
 
 public class Main {
+    
     private static final String INVALID_COMMAND = "Invalid command.";
     private static final String HELP_MESSAGE_FORMAT = "%s - %s\n";
     private static final String QUIT_MESSAGE = "Bye.";

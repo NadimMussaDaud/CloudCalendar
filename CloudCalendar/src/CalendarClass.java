@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 import Exceptions.*;
 
 public class CalendarClass implements Calendar{
@@ -66,10 +65,8 @@ public class CalendarClass implements Calendar{
         }
         Invite invite = new InviteClass(eventName, date, accountName, accountName);
         accounts.get(accountName).addEvent( invite );
-        events.get(eventName).addInvitee(invite);
-
         events.put(eventName, new EventClass(accountName, eventName, priority, date, topics));
-        
+        events.get(eventName).addInvitee(invite);        
     }
 
    
