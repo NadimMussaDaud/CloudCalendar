@@ -149,7 +149,7 @@ public class CalendarClass implements Calendar{
             throw new NoEventInAccountException();
         if(acc1.hasEvent(event))
             throw new AlreadyInvitedException();
-        if(acc1.isAvailable(events.get(event).getDate()))
+        if(!acc1.isAvailable(events.get(event).getDate()) && events.get(event).getPriority().equals(Main.HIGH)) 
             throw new AttendingOtherEventException();
 
         //Adds the new invite. In case something is removed it returns a iterator for it,
