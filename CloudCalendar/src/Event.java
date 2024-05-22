@@ -21,4 +21,6 @@ public interface Event {
      * @return true if has at least one topic from @topics
      */
     boolean hasTopic(List<String> topics);
+    boolean hasInvite(String invitee);
+    boolean hasResponded(String invitee);
 }

@@ -48,6 +48,21 @@ abstract class AbstractAccount implements Account {
         return null;
     }
 
+    public void inviteResponse(String event, String response){
+        for (Invite invite : invites) {
+            if(invite.getEvent().equals(event)){
+                if(response.equals("accept"))
+                    invite.accept();
+                else 
+                    invite.reject();
+            }
+            else {
+                //Reject all the others
+                invite.reject();
+            }
+        }
+    }
+
     public abstract String getType();
     
 }

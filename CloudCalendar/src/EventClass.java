@@ -83,6 +83,22 @@ public class EventClass  implements Event{
     public int getInvitedNumber() {
         return invitees.size();
     }
+    @Override
+    public boolean hasInvite(String invitee) {
+        for (Invite invite : invitees) {
+            if (invite.getInvitee().equals(invitee))
+                return true;
+        }
+        return false;
+    }
+    @Override
+    public boolean hasResponded(String invitee) {
+        for (Invite invite : invitees) {
+            if(invite.getInvitee().equals(invitee))
+                return !invite.getStatus().equals("unanswered");
+        }
+        return false;
+    }
    
     
 }

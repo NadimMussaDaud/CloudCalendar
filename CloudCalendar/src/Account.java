@@ -15,6 +15,8 @@ public interface Account {
 
     Iterator<Invite> getEvents();
 
-    Object getStatus(String event);
+    String getStatus(String event);
+
+    void inviteResponse(String event, String response);
     
 }

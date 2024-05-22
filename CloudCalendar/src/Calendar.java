@@ -18,5 +18,9 @@ public interface Calendar {
     Iterator<Event> eventsByTopics(List<String> topics) throws NoEventsOnTopicsException;
 
     Event getEvent(String promoter, String event) throws NonExistentAccountException, NoEventInAccountException;
+
+    Iterator<Invite> response(String invitee, String promoter, String event, String response) throws NonExistentAccountException, UnknownResponseException, NoEventInAccountException, NotInInvitationListException, AlreadyRespondedException;
+
+    Iterator<Invite> invite(String invitee,String promoter,String event) throws NonExistentAccountException,NoEventInAccountException, AlreadyInvitedException, AttendingOtherEventException;
     
 }

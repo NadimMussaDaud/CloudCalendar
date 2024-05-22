@@ -122,10 +122,53 @@ public class CalendarClass implements Calendar{
         if(acc == null)
             throw new NonExistentAccountException();
         if (!hasEvent(promoter, event))
-        throw new NoEventInAccountException();
+            throw new NoEventInAccountException();
         
         return events.get(event);
     }
+
+    @Override
+    public Iterator<Invite> response(String invitee, String promoter, String event, String response) throws NonExistentAccountException, UnknownResponseException, NoEventInAccountException, NotInInvitationListException, AlreadyRespondedException{
+        Account acc1 = accounts.get(invitee);
+        Account acc2 = accounts.get(promoter);
+        if(acc1 == null)
+            throw new NonExistentAccountException(invitee);
+        if(acc2 == null)
+            throw new NonExistentAccountException(promoter);
+        if(!isResponse(response))
+            throw new UnknownResponseException();
+        if (!hasEvent(promoter, event))
+            throw new NoEventInAccountException();
+        if(!events.get(event).hasInvite(invitee))
+            throw new NotInInvitationListException();
+        if(events.get(event).hasResponded(invitee))
+            throw new AlreadyRespondedException();
+
+        acc1.inviteResponse(event, response);
+
+        Iterator<Invite> it = acc1.getEvents(); 
+        List<Invite> rejected = new ArrayList<>();
+        while (it.hasNext()) {
+            Invite invite = it.next();
+            if(invite.getStatus().equals("rejected"))
+                rejected.add(invite);
+        }
+
+        return rejected.iterator();
+    }
+
+    private boolean isResponse(String response) {
+        return (response.equals("accept") || response.equals("reject"));
+    }
+
+    @Override
+    public Iterator<Invite> invite(String invitee, String promoter, String event) throws NonExistentAccountException,
+            NoEventInAccountException, AlreadyInvitedException, AttendingOtherEventException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'invite'");
+    }
+
+    
 }
 
     

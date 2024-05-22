@@ -38,6 +38,16 @@ public class Main {
     private static final String EVENT_INFO_FORMAT = "%s occurs on %s:\n";
     private static final String EVENT_INFO = "%s [%s]\n";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH'h'");
+    private static final String UNKNOWN_RESPONSE = "Unknown event response.\n";
+    private static final String NOT_IN_LIST = "Account %s is not on the invitation list.\n";
+    private static final String ALREADY_RESPONDED = "Account %s has already responded.\n";
+    private static final String INVITATION_RESPONSE = "Account %s has replied %s to the invitation.\n";
+    private static final String INVITATION_RESPONSE_FORMAT = "%s promoted by %s was rejected\n";
+    private static final String INVITATION_ACCEPTED = "%s accepted the invitation.\n";
+    private static final String INVITED_MESSAGE = "%s was invited.\n";
+    private static final String EVENT_REMOVED = "%s promoted by %s was removed.\n";
+    private static final String ALREADY_INVITED = "%s was already invited.\n";
+    private static final String IN_OTHER_EVENT = "%s is already attending another event.\n";
 
     
     private static Calendar calendar;
@@ -156,12 +166,65 @@ public class Main {
         String event = in.nextLine();
         String response = in.nextLine();
 
+        try {
+            Iterator<Invite> it = calendar.response(invitee, promoter, event, response);
+
+            System.out.printf(INVITATION_RESPONSE,invitee,response);
+
+            while (it.hasNext()) {
+                Invite invite = it.next();
+                System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
+            }
+
+
+        } catch (NonExistentAccountException e) {
+            System.out.printf(NO_EXISTENT_ACCOUNT, e.getName());        
+        } catch (UnknownResponseException e){
+            System.out.printf(UNKNOWN_RESPONSE);
+        } catch (NoEventInAccountException e){
+            System.out.printf(NO_EVENT_IN_ACCOUNT, event, promoter);
+        } catch (NotInInvitationListException e){
+            System.out.printf(NOT_IN_LIST, invitee);
+        } catch (AlreadyRespondedException e){
+            System.out.printf(ALREADY_RESPONDED, invitee );
+        }
+
     }
 
     private static void invite(Scanner in) {
         String invitee = in.nextLine().trim();
         String promoter = in.next();
         String event = in.nextLine();
+
+        try {
+            Iterator<Invite> it = calendar.invite(invitee,promoter,event);
+
+            if(it.hasNext()){
+                System.out.printf(INVITATION_ACCEPTED, invitee);
+
+                while (it.hasNext()) {
+                    Invite invite = it.next();
+
+                    if(invite.getHost().equals(invitee)) 
+                        System.out.printf(EVENT_REMOVED, event, invitee);
+                    else
+                        System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
+                }
+            }else{
+                System.out.printf(INVITED_MESSAGE, invitee);
+            }
+            
+            
+
+        } catch (NonExistentAccountException e) {
+            System.out.printf(NO_EXISTENT_ACCOUNT, e.getName()); 
+        } catch (NoEventInAccountException e){
+            System.out.printf(NO_EVENT_IN_ACCOUNT, event, promoter);
+        } catch (AlreadyInvitedException e){
+            System.out.printf(ALREADY_INVITED,invitee);
+        } catch (AttendingOtherEventException e){
+            System.out.printf(IN_OTHER_EVENT, invitee);
+        }
 
     }
 
