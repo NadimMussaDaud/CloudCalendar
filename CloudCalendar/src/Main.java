@@ -14,6 +14,7 @@ import Exceptions.*;
 public class Main {
     
     private static final String INVALID_COMMAND = "Invalid command.";
+    private static final String AVAILABLE_COMMANDS = "Available commands:\n";
     private static final String HELP_MESSAGE_FORMAT = "%s - %s\n";
     private static final String QUIT_MESSAGE = "Bye.";
     private static final String ACCOUNT_REGISTERED_MESSAGE = "%s was registered.\n";
@@ -34,7 +35,8 @@ public class Main {
     private static final String NO_EVENTS_ON_TOPICS = "No events on these topics.";
     private static final String EVENTS_ON_TOPICS_FORMAT = "%s promoted by %s on %s\n";
     private static final String EVENTS_ON_TOPICS = "Events on topics %s:\n";
-    private static final String NO_EVENT_IN_ACCOUNT = "%s does not exist in account %s.\n";
+    private static final String NO_EVENT_IN_ACCOUNT = "%s does not exist in account %s\n";
+    private static final String NO_EVENTS = "Account %s has no events.\n";
     private static final String EVENT_INFO_FORMAT = "%s occurs on %s:\n";
     private static final String EVENT_INFO = "%s [%s]\n";
     private static final String UNKNOWN_RESPONSE = "Unknown event response.\n";
@@ -47,10 +49,10 @@ public class Main {
     private static final String EVENT_REMOVED = "%s promoted by %s was removed.\n";
     private static final String ALREADY_INVITED = "%s was already invited.\n";
     private static final String IN_OTHER_EVENT = "%s is already attending another event.\n";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH'h'");
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH'h'");
 
     private static Calendar calendar;
-
+    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         calendar = new CalendarClass();
@@ -73,15 +75,15 @@ public class Main {
         switch (command) {
             case REGISTER -> register(in);
             case ACCOUNTS -> list();
-            case CREATE -> create(in);
-            case EVENTS -> events(in);
-            case INVITE -> invite(in);
+            case CREATE   -> create(in);
+            case EVENTS   -> events(in);
+            case INVITE   -> invite(in);
             case RESPONSE -> response(in);
-            case EVENT -> event(in);
-            case TOPICS -> topics(in);
-            case HELP -> help();
-            case EXIT -> exitMessage();
-            case UNKNOWN -> invalidCommand();
+            case EVENT    -> event(in);
+            case TOPICS   -> topics(in);
+            case HELP     -> help();
+            case EXIT     -> exitMessage();
+            case UNKNOWN  -> invalidCommand();
         }
     }
 
@@ -210,10 +212,14 @@ public class Main {
 
         try {
             Iterator<Event> it = calendar.eventsFrom(accountName);
-            System.out.printf(EVENTS_FORMAT, accountName);
-            while(it.hasNext()){
-                Event event = it.next();
-                System.out.printf(EVENTS_ACCOUNTS_FORMAT, event.getName(), event.getInvitedNumber(), event.getAccepts(), event.getRejections(), event.getUnanswered());
+            if(it.hasNext()){
+                System.out.printf(EVENTS_FORMAT, accountName);
+                while(it.hasNext()){
+                    Event event = it.next();
+                    System.out.printf(EVENTS_ACCOUNTS_FORMAT, event.getName(), event.getInvitedNumber(), event.getAccepts(), event.getRejections(), event.getUnanswered());
+                }
+            }else{
+                System.out.printf(NO_EVENTS, accountName);
             }
         } catch (NonExistentAccountException e) {
             System.out.printf(NO_EXISTENT_ACCOUNT, accountName);
@@ -278,6 +284,7 @@ public class Main {
 
 
     private static void help() {
+        System.out.printf(AVAILABLE_COMMANDS);
         for (Commands command : Commands.values()) {
             if (!command.equals(Commands.UNKNOWN)) {
                 System.out.printf(HELP_MESSAGE_FORMAT, command.getName(), command.getDescription());
