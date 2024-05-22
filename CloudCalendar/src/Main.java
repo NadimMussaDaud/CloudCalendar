@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -23,7 +24,7 @@ public class Main {
     private static final String LIST_ACCOUNTS_FORMAT = "%s [%s]\n";
     private static final String NO_EXISTENT_ACCOUNT = "Account %s does not exist.\n";
     private static final String UNKNOWN_PRIORITY = "Unknown priority type.\n";
-    private static final String NO_NEW_EVENTS = "Guest account %s cannot create new events.\n";
+    private static final String NO_NEW_EVENTS = "Guest account %s cannot create events.\n";
     private static final String NO_HIGH_PRIORITY_EVENTS = "Account %s cannot create high priority events.\n";
     private static final String DUPLICATE_EVENT = "%s already exists in account %s.\n";
     private static final String PROMOTER_OCCUPIED = "Account %s is busy.\n";
@@ -36,6 +37,8 @@ public class Main {
     private static final String NO_EVENT_IN_ACCOUNT = "%s does not exist in account %s.\n";
     private static final String EVENT_INFO_FORMAT = "%s occurs on %s:\n";
     private static final String EVENT_INFO = "%s [%s]\n";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH'h'");
+
     
     private static Calendar calendar;
 
@@ -129,13 +132,13 @@ public class Main {
 
     private static void event(Scanner in) {
         String promoter = in.next();
-        String event = in.nextLine();
+        String event = in.nextLine().trim();
 
         try {
             Event e = calendar.getEvent(promoter,event);
             Iterator<Invite> it = e.getInvitees();
     
-            System.out.printf(EVENT_INFO_FORMAT, event, e.getDate());
+            System.out.printf(EVENT_INFO_FORMAT, event, e.getDate().format(formatter));
             while (it.hasNext()) {
                 Invite i = it.next();
                 System.out.printf(EVENT_INFO, i.getInvitee(), i.getStatus());

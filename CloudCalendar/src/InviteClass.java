@@ -2,7 +2,7 @@ import java.time.LocalDateTime;
 
 public class InviteClass implements Invite{
 
-    private static final String ACCEPTED = "accepeted";
+    private static final String ACCEPTED = "accepted";
     private static final String REJECTED = "rejected";
     private static final String UNANSWERED = "unanswered";
     

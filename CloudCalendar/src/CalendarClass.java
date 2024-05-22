@@ -121,7 +121,7 @@ public class CalendarClass implements Calendar{
         
         if(acc == null)
             throw new NonExistentAccountException();
-        if (!acc.hasEvent(event))
+        if (!hasEvent(promoter, event))
         throw new NoEventInAccountException();
         
         return events.get(event);
