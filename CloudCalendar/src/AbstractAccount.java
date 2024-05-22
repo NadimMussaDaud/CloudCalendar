@@ -67,6 +67,10 @@ abstract class AbstractAccount implements Account {
         return null;
     }
 
+    public void removeInvite(Invite invite){
+        invites.remove(invite);
+    }
+
     public abstract String getType();
     
 }

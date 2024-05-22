@@ -20,5 +20,7 @@ public interface Account {
     Invite addInvite(Invite invite);
 
     void inviteResponse(String event, String response);
+
+    void removeInvite(Invite invite);
     
 }

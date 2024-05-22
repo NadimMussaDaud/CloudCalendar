@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.plaf.basic.BasicBorders.MarginBorder;
-
 import Exceptions.*;
 
 public class CalendarClass implements Calendar{
@@ -69,8 +67,6 @@ public class CalendarClass implements Calendar{
         events.get(eventName).addInvitee(invite);        
     }
 
-    //TODO: Ir para uma conta e iterar todos os invites
-    //TODO: Não esquecer de adicionar os invite do promotor ao mesmo quando ele cria evento e dar como aceite.
     @Override
     public Iterator<Event> eventsFrom(String accountName) throws NonExistentAccountException, NoNewEventsException{
         Account acc = accounts.get(accountName);
@@ -167,8 +163,13 @@ public class CalendarClass implements Calendar{
                 if(invite.getStatus().equals(Main.REJECTED))
                     oldInvites.add(invite);
             }
-        }else
+        }else if(acc1.getType().equals(Main.STAFF)){
             oldInvites.add(removed);
+            events.remove(removed.getEvent());
+            //TODO: Remover em eventos e invites de todas contas
+            for (Account acc : accounts.values()) 
+                acc.removeInvite(removed);
+        }
 
         return oldInvites.iterator();
     }
