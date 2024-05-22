@@ -181,7 +181,7 @@ public class Main {
     private static void invite(Scanner in) {
         String invitee = in.nextLine().trim();
         String promoter = in.next();
-        String event = in.nextLine();
+        String event = in.nextLine().trim();
 
         try {
             Iterator<Invite> it = calendar.invite(invitee,promoter,event);
