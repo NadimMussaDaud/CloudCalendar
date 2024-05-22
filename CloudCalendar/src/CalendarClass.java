@@ -5,14 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.plaf.basic.BasicBorders.MarginBorder;
 
 import Exceptions.*;
 
 public class CalendarClass implements Calendar{
 
     private Map<String, Account> accounts;
-    private Map<String, Event> events; //Lista de eventos indexada por nome do evento
-    
+    private Map<String, Event> events; 
 
     public CalendarClass(){
         this.accounts = new HashMap<>();
@@ -37,9 +37,9 @@ public class CalendarClass implements Calendar{
             throw new NonExistentTypeException();
         }
         switch (type) {
-            case "staff" ->  accounts.put(accountName, new StaffAccount(accountName));
-            case "manager" -> accounts.put(accountName, new ManagerAccount(accountName));
-            case "guest" ->  accounts.put(accountName, new GuestAccount(accountName));
+            case Main.STAFF ->  accounts.put(accountName, new StaffAccount(accountName));
+            case Main.MANAGER -> accounts.put(accountName, new ManagerAccount(accountName));
+            case Main.GUEST ->  accounts.put(accountName, new GuestAccount(accountName));
         }
     }
 
@@ -51,10 +51,10 @@ public class CalendarClass implements Calendar{
         if(!isPriority(priority)) {
             throw new NonExistentPriorityException();
         }
-        if(accounts.get(accountName).getType().equals("guest")) {
+        if(accounts.get(accountName).getType().equals(Main.GUEST)) {
             throw  new NoNewEventsException();
         }
-        if(priority.equals("high") && !accounts.get(accountName).getType().equals("manager")) {
+        if(priority.equals(Main.HIGH) && !accounts.get(accountName).getType().equals(Main.MANAGER)) {
             throw new NoHighPriorityEventsException();
         }
         if(hasEvent(accountName, eventName)) {
@@ -76,7 +76,7 @@ public class CalendarClass implements Calendar{
         Account acc = accounts.get(accountName);
         if(acc == null)
             throw new NonExistentAccountException();
-        if(acc.getType().equals("guest"))
+        if(acc.getType().equals(Main.GUEST))
             throw new NoNewEventsException();
 
         Iterator<Invite> it = acc.getEvents();
@@ -132,7 +132,7 @@ public class CalendarClass implements Calendar{
         List<Invite> rejected = new ArrayList<>();
         while (it.hasNext()) {
             Invite invite = it.next();
-            if(invite.getStatus().equals("rejected"))
+            if(invite.getStatus().equals(Main.REJECTED))
                 rejected.add(invite);
         }
 
@@ -160,11 +160,11 @@ public class CalendarClass implements Calendar{
         // Otherwise gets the rejected invites in case it's a staff member
         List<Invite> oldInvites = new ArrayList<>();
         Invite removed = acc1.addInvite(new InviteClass(event, events.get(event).getDate(), invitee, promoter));
-        if(removed == null && acc1.getType().equals("staff")){
+        if(removed == null && acc1.getType().equals(Main.STAFF)){
             Iterator<Invite> it = acc1.getEvents();
             while (it.hasNext()) {
                 Invite invite = it.next();
-                if(invite.getStatus().equals("rejected"))
+                if(invite.getStatus().equals(Main.REJECTED))
                     oldInvites.add(invite);
             }
         }else
@@ -174,7 +174,7 @@ public class CalendarClass implements Calendar{
     }
 
     private boolean isResponse(String response) {
-        return (response.equals("accept") || response.equals("reject"));
+        return (response.equals(Main.ACCEPT) || response.equals(Main.REJECT));
     }
 
     private boolean isAvailable(String accountName, LocalDateTime date) {
@@ -186,11 +186,11 @@ public class CalendarClass implements Calendar{
     }
 
     private boolean isPriority(String priority) {
-        return (priority.equals("high") || priority.equals("mid"));
+        return (priority.equals(Main.HIGH) || priority.equals(Main.MID));
     }
 
     private boolean isType(String type) {
-        return (type.equals("staff") || type.equals("manager") || type.equals("guest"));
+        return (type.equals(Main.STAFF) || type.equals(Main.MANAGER) || type.equals(Main.GUEST));
     }
 }
 

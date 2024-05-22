@@ -49,6 +49,14 @@ public class Main {
     private static final String EVENT_REMOVED = "%s promoted by %s was removed.\n";
     private static final String ALREADY_INVITED = "%s was already invited.\n";
     private static final String IN_OTHER_EVENT = "%s is already attending another event.\n";
+    public static final String STAFF = "staff";
+    public static final String MANAGER = "manager";
+    public static final String GUEST = "guest";
+    public static final String HIGH = "high";
+    public static final String MID = "mid";
+    public static final String ACCEPT = "accept";
+    public static final String REJECT = "reject";
+    public static final String REJECTED = "rejected";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH'h'");
 
     private static Calendar calendar;
