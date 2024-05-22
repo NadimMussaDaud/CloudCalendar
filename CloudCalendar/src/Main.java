@@ -37,7 +37,6 @@ public class Main {
     private static final String NO_EVENT_IN_ACCOUNT = "%s does not exist in account %s.\n";
     private static final String EVENT_INFO_FORMAT = "%s occurs on %s:\n";
     private static final String EVENT_INFO = "%s [%s]\n";
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH'h'");
     private static final String UNKNOWN_RESPONSE = "Unknown event response.\n";
     private static final String NOT_IN_LIST = "Account %s is not on the invitation list.\n";
     private static final String ALREADY_RESPONDED = "Account %s has already responded.\n";
@@ -48,8 +47,8 @@ public class Main {
     private static final String EVENT_REMOVED = "%s promoted by %s was removed.\n";
     private static final String ALREADY_INVITED = "%s was already invited.\n";
     private static final String IN_OTHER_EVENT = "%s is already attending another event.\n";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH'h'");
 
-    
     private static Calendar calendar;
 
     public static void main(String[] args) {
@@ -72,39 +71,17 @@ public class Main {
 
     private static void processCommand(Commands command, Scanner in) {
         switch (command) {
-            case REGISTER:
-                register(in);
-                break;
-            case ACCOUNTS:
-                list();
-                break;
-            case CREATE:
-                create(in);
-                break;
-            case EVENTS:
-                events(in);
-                break;
-            case INVITE:
-                invite(in);
-                break;
-            case RESPONSE:
-                response(in);
-                break;
-            case EVENT:
-                event(in);
-                break;
-            case TOPICS:
-                topics(in);
-                break;
-            case HELP:
-                help();
-                break;
-            case EXIT:
-                exitMessage();
-                break;
-            case UNKNOWN:
-                invalidCommand();
-                break;
+            case REGISTER -> register(in);
+            case ACCOUNTS -> list();
+            case CREATE -> create(in);
+            case EVENTS -> events(in);
+            case INVITE -> invite(in);
+            case RESPONSE -> response(in);
+            case EVENT -> event(in);
+            case TOPICS -> topics(in);
+            case HELP -> help();
+            case EXIT -> exitMessage();
+            case UNKNOWN -> invalidCommand();
         }
     }
 

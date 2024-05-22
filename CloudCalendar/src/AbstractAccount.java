@@ -6,7 +6,7 @@ import java.util.List;
 abstract class AbstractAccount implements Account {
     
     private String name ;
-    private List<Invite> invites; // All events in which he is invited an others which he is hosting
+    protected List<Invite> invites; // All events in which he is invited an others which he is hosting
 
     public AbstractAccount(String name){
         this.name = name;
@@ -61,6 +61,10 @@ abstract class AbstractAccount implements Account {
                 invite.reject();
             }
         }
+    }
+    public Invite addInvite(Invite invite){
+        invites.add(invite);
+        return null;
     }
 
     public abstract String getType();

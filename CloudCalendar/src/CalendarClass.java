@@ -69,20 +69,6 @@ public class CalendarClass implements Calendar{
         events.get(eventName).addInvitee(invite);        
     }
 
-   
-
-    private boolean isAvailable(String accountName, LocalDateTime date) {
-        return accounts.get(accountName).isAvailable(date);
-    }
-
-    private boolean hasEvent(String accountName, String eventName) {
-        return accounts.get(accountName).hasEvent(eventName);
-    }
-
-    private boolean isPriority(String priority) {
-        return (priority.equals("high") || priority.equals("mid"));
-    }
-
     //TODO: Ir para uma conta e iterar todos os invites
     //TODO: Não esquecer de adicionar os invite do promotor ao mesmo quando ele cria evento e dar como aceite.
     @Override
@@ -111,10 +97,6 @@ public class CalendarClass implements Calendar{
         return events.iterator();
     }
  
-    private boolean isType(String type) {
-        return (type.equals("staff") || type.equals("manager") || type.equals("guest"));
-    }
-
     @Override
     public Event getEvent(String promoter, String event) throws NonExistentAccountException, NoEventInAccountException{
         Account acc = accounts.get(promoter);
@@ -157,18 +139,59 @@ public class CalendarClass implements Calendar{
         return rejected.iterator();
     }
 
+    @Override
+    public Iterator<Invite> invite(String invitee, String promoter, String event) throws NonExistentAccountException,
+            NoEventInAccountException, AlreadyInvitedException, AttendingOtherEventException {
+        Account acc1 = accounts.get(invitee);
+        Account acc2 = accounts.get(promoter);
+
+        if(acc1 == null)
+            throw new NonExistentAccountException(invitee);
+        if(acc2 == null)
+            throw new NonExistentAccountException(promoter);
+        if (!hasEvent(promoter, event))
+            throw new NoEventInAccountException();
+        if(acc1.hasEvent(event))
+            throw new AlreadyInvitedException();
+        if(acc1.isAvailable(events.get(event).getDate()))
+            throw new AttendingOtherEventException();
+
+        //Adds the new invite. In case something is removed it returns a iterator for it,
+        // Otherwise gets the rejected invites in case it's a staff member
+        List<Invite> oldInvites = new ArrayList<>();
+        Invite removed = acc1.addInvite(new InviteClass(event, events.get(event).getDate(), invitee, promoter));
+        if(removed == null && acc1.getType().equals("staff")){
+            Iterator<Invite> it = acc1.getEvents();
+            while (it.hasNext()) {
+                Invite invite = it.next();
+                if(invite.getStatus().equals("rejected"))
+                    oldInvites.add(invite);
+            }
+        }else
+            oldInvites.add(removed);
+
+        return oldInvites.iterator();
+    }
+
     private boolean isResponse(String response) {
         return (response.equals("accept") || response.equals("reject"));
     }
 
-    @Override
-    public Iterator<Invite> invite(String invitee, String promoter, String event) throws NonExistentAccountException,
-            NoEventInAccountException, AlreadyInvitedException, AttendingOtherEventException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'invite'");
+    private boolean isAvailable(String accountName, LocalDateTime date) {
+        return accounts.get(accountName).isAvailable(date);
     }
 
-    
+    private boolean hasEvent(String accountName, String eventName) {
+        return accounts.get(accountName).hasEvent(eventName);
+    }
+
+    private boolean isPriority(String priority) {
+        return (priority.equals("high") || priority.equals("mid"));
+    }
+
+    private boolean isType(String type) {
+        return (type.equals("staff") || type.equals("manager") || type.equals("guest"));
+    }
 }
 
     
