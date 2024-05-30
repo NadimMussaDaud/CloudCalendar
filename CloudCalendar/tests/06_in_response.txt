@@ -1,0 +1,140 @@
+register pam.beesly@dunder.mifflin.com staff
+register michael.scott@dunder.mifflin.com manager
+register david.wallace@dunder.mifflin.com manager
+register bob.vance@vance.refrigeration.com guest
+register dwight.schrute@dunder.mifflin.com staff
+register andy.bernard@dunder.mifflin.com staff
+register angela.martin@dunder.mifflin.com staff
+accounts
+create michael.scott@dunder.mifflin.com
+Integration celebration
+high 2024 05 31 17
+merge stamford scranton
+event michael.scott@dunder.mifflin.com Integration celebration
+invite david.wallace@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Integration celebration
+invite bob.vance@vance.refrigeration.com
+michael.scott@dunder.mifflin.com Integration celebration
+event michael.scott@dunder.mifflin.com Integration celebration
+create angela.martin@dunder.mifflin.com
+The launch party
+mid 2024 05 31 17
+website launch scranton
+invite andy.bernard@dunder.mifflin.com
+angela.martin@dunder.mifflin.com The launch party
+invite bob.vance@vance.refrigeration.com
+angela.martin@dunder.mifflin.com The launch party
+invite pam.beesly@dunder.mifflin.com
+angela.martin@dunder.mifflin.com The launch party
+invite dwight.schrute@dunder.mifflin.com
+angela.martin@dunder.mifflin.com The launch party
+invite david.wallace@dunder.mifflin.com
+angela.martin@dunder.mifflin.com The launch party
+event angela.martin@dunder.mifflin.com The launch party
+create david.wallace@dunder.mifflin.com
+Another launch party
+mid 2024 05 31 17
+site office celebration
+event angela.martin@dunder.mifflin.com The launch party
+events angela.martin@dunder.mifflin.com
+invite andy.bernard@dunder.mifflin.com
+david.wallace@dunder.mifflin.com Another launch party
+invite bob.vance@vance.refrigeration.com
+david.wallace@dunder.mifflin.com Another launch party
+invite pam.beesly@dunder.mifflin.com
+david.wallace@dunder.mifflin.com Another launch party
+invite michael.scott@dunder.mifflin.com
+david.wallace@dunder.mifflin.com Another launch party
+invite dwight.schrute@dunder.mifflin.com
+david.wallace@dunder.mifflin.com Another launch party
+event david.wallace@dunder.mifflin.com Another launch party
+events david.wallace@dunder.mifflin.com
+response bob.vance@vance.refrigeration.com
+angela.martin@dunder.mifflin.com The launch party
+accept
+response pam.beesly@dunder.mifflin.com
+angela.martin@dunder.mifflin.com The launch party
+accept
+response andy.bernard@dunder.mifflin.com
+angela.martin@dunder.mifflin.com The launch party
+reject
+response andy.bernard@dunder.mifflin.com
+david.wallace@dunder.mifflin.com Another launch party
+reject
+event david.wallace@dunder.mifflin.com Another launch party
+event angela.martin@dunder.mifflin.com The launch party
+event michael.scott@dunder.mifflin.com Integration celebration
+create michael.scott@dunder.mifflin.com
+Koy pond
+mid 2024 07 28 15
+fall awkward video
+event michael.scott@dunder.mifflin.com Koy pond
+invite andy.bernard@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Koy pond
+response andy.bernard@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Koy pond
+reject
+invite bob.vance@vance.refrigeration.com
+michael.scott@dunder.mifflin.com Koy pond
+invite pam.beesly@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Koy pond
+invite dwight.schrute@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Koy pond
+event michael.scott@dunder.mifflin.com Koy pond
+invite andy.bernard@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Integration celebration
+create dwight.schrute@dunder.mifflin.com
+Schrute farms event
+mid 2024 07 28 15
+B&B beet plantation
+invite pam.beesly@dunder.mifflin.com
+dwight.schrute@dunder.mifflin.com Schrute farms event
+invite bob.vance@vance.refrigeration.com
+dwight.schrute@dunder.mifflin.com Schrute farms event
+response bob.vance@vance.refrigeration.com
+dwight.schrute@dunder.mifflin.com Schrute farms event
+accept
+event dwight.schrute@dunder.mifflin.com Schrute farms event
+register super.manager@dunder.mifflin.com manager
+create super.manager@dunder.mifflin.com
+Some vip meeting
+high 2024 07 28 15
+vip meeting
+invite bob.vance@vance.refrigeration.com
+super.manager@dunder.mifflin.com Some vip meeting
+response bob.vance@vance.refrigeration.com
+super.manager@dunder.mifflin.com Some vip meeting
+accept
+invite dwight.schrute@dunder.mifflin.com
+super.manager@dunder.mifflin.com Some vip meeting
+event dwight.schrute@dunder.mifflin.com Schrute farms event
+events bob.vance@vance.refrigeration.com
+invite pam.beesly@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Integration celebration
+response pam.beesly@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Integration celebration
+accept
+event michael.scott@dunder.mifflin.com Koy pond
+event michael.scott@dunder.mifflin.com Integration celebration
+event david.wallace@dunder.mifflin.com Another launch party
+event angela.martin@dunder.mifflin.com The launch party
+event super.manager@dunder.mifflin.com Some vip meeting
+response grogu@mandalorian.com
+david.wallace@dunder.mifflin.com Another launch party
+reject
+response andy.bernard@dunder.mifflin.com
+david.wallace@dunder.mifflin.com Another launch party
+maybe
+response david.wallace@dunder.mifflin.com
+angela.martin@dunder.mifflin.com Integration celebration
+accept
+register meredith.palmer@dunder.mifflin.com staff
+response meredith.palmer@dunder.mifflin.com
+michael.scott@dunder.mifflin.com Integration celebration
+reject
+response dwight.schrute@dunder.mifflin.com
+david.wallace@dunder.mifflin.com Another launch party
+accept
+event david.wallace@dunder.mifflin.com Another launch party
+event angela.martin@dunder.mifflin.com The launch party
+exit

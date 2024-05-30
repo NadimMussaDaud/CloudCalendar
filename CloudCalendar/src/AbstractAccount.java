@@ -1,9 +1,10 @@
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-abstract class AbstractAccount implements Account {
+abstract class AbstractAccount implements Account{
     
     private String name ;
     protected List<Invite> invites; // All events in which he is invited an others which he is hosting
@@ -23,11 +24,12 @@ abstract class AbstractAccount implements Account {
         return invites.stream().anyMatch(invite -> invite.getEvent().equals(eventName));
     }
     
+
     /**
      * Method built with AI
      */
     public boolean isAvailable(LocalDateTime date){
-        return invites.stream().noneMatch(invite -> invite.getDate().equals(date));
+        return invites.stream().noneMatch(invite -> invite.getDate().equals(date) && invite.getHost().equals(this.name));
     }
 
     public void addEvent(Invite invite) {
@@ -69,6 +71,11 @@ abstract class AbstractAccount implements Account {
 
     public void removeInvite(Invite invite){
         invites.remove(invite);
+    }
+
+    @Override
+    public int compareTo(Account other) {
+        return this.name.compareTo(other.getName());
     }
 
     public abstract String getType();

@@ -1,4 +1,5 @@
 
+
 public enum Commands {
 
     REGISTER("register", "registers a new account"),

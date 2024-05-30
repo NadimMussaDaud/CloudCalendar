@@ -1,0 +1,38 @@
+Unknown command ACCOUNT. Type help to see available commands.
+Unknown command ADD. Type help to see available commands.
+Unknown command PAM.BEESLY@DUNDER.MIFFLIN.COM. Type help to see available commands.
+Unknown command STAFF. Type help to see available commands.
+Available commands:
+register - registers a new account
+accounts - lists all registered accounts
+create - creates a new event
+events - lists all events of an account
+invite - invites an user to an event
+response - response to an invitation
+event - shows detailed information of an event
+topics - shows all events that cover a list of topics
+help - shows the available commands
+exit - terminates the execution of the program
+Available commands:
+register - registers a new account
+accounts - lists all registered accounts
+create - creates a new event
+events - lists all events of an account
+invite - invites an user to an event
+response - response to an invitation
+event - shows detailed information of an event
+topics - shows all events that cover a list of topics
+help - shows the available commands
+exit - terminates the execution of the program
+Available commands:
+register - registers a new account
+accounts - lists all registered accounts
+create - creates a new event
+events - lists all events of an account
+invite - invites an user to an event
+response - response to an invitation
+event - shows detailed information of an event
+topics - shows all events that cover a list of topics
+help - shows the available commands
+exit - terminates the execution of the program
+Bye!

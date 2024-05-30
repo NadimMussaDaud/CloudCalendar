@@ -1,0 +1,86 @@
+events grogu@mandalorian.com
+register pam.beesly@dunder.mifflin.com staff
+register michael.scott@dunder.mifflin.com manager
+register bob.vance@vance.refrigeration.com guest
+register andy.bernard@dunder.mifflin.com staff
+register angela.martin@dunder.mifflin.com staff
+accounts
+events angela.martin@dunder.mifflin.com
+Events pam.beesly@dunder.mifflin.com
+eVeNTs bob.vance@vance.refrigeration.com
+events michael.scott@dunder.mifflin.com
+events andy.bernard@dunder.mifflin.com
+create angela.martin@dunder.mifflin.com
+The launch party
+mid 2024 05 31 17
+website launch scranton
+create michael.scott@dunder.mifflin.com
+The launch party
+mid 2024 05 31 17
+website launch scranton
+create andy.bernard@dunder.mifflin.com
+The launch party
+mid 2024 06 11 10
+website
+create michael.scott@dunder.mifflin.com
+Integration celebration
+high 2024 04 28 14
+merge stamford scranton
+create michael.scott@dunder.mifflin.com
+Another integration celebration
+high 2024 04 28 14
+merge stamford scranton
+create michael.scott@dunder.mifflin.com
+Yet another integration celebration
+mid 2024 04 28 14
+merge stamford scranton
+create angela.martin@dunder.mifflin.com
+Integration celebration
+high 2024 04 28 14
+mandalore jedi
+create grogu@mandalorian.com
+Din Grogu celebration
+mid 2025 07 12 10
+mandalorian star_wars
+create michael.scott@dunder.mifflin.com
+Integration celebration
+mid 2025 12 10 15
+merge stamford scranton
+create michael.scott@dunder.mifflin.com
+Some meeting
+mid 2024 05 31 17
+stuff whatever
+create michael.scott@dunder.mifflin.com
+Koy pond
+low 2024 04 28 15
+fall awkward video
+create angela.martin@dunder.mifflin.com
+Party planning committee meeting 08
+mid 2025 05 12 08
+celebration birthday
+create angela.martin@dunder.mifflin.com
+Party planning committee meeting 09
+mid 2025 05 12 09
+celebration birthday_09
+create angela.martin@dunder.mifflin.com
+Party planning committee meeting 10
+mid 2025 05 12 10
+celebration birthday_10
+create angela.martin@dunder.mifflin.com
+Party planning committee meeting 11
+mid 2025 05 12 11
+celebration birthday_11
+create bob.vance@vance.refrigeration.com
+Air conditioners sale
+mid 2024 06 02 10
+ac sale
+create Andy.Bernard@dunder.mifflin.com
+The Cornell appreciation event
+mid 2024 05 31 17
+cornell <3
+events pam.beesly@dunder.mifflin.com
+events michael.scott@dunder.mifflin.com
+events bob.vance@vance.refrigeration.com
+events andy.bernard@dunder.mifflin.com
+events angela.martin@dunder.mifflin.com
+exit

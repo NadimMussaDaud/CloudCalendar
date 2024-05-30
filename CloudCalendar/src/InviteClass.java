@@ -1,3 +1,4 @@
+
 import java.time.LocalDateTime;
 
 public class InviteClass implements Invite{
@@ -6,11 +7,12 @@ public class InviteClass implements Invite{
     private static final String REJECTED = "rejected";
     private static final String UNANSWERED = "unanswered";
     
-    private String event, invitee, host, status;
+    private String event, priority, invitee, host, status;
     private LocalDateTime date;
 
-    public InviteClass(String event, LocalDateTime date, String invitee, String host){
+    public InviteClass(String event, String priority, LocalDateTime date, String invitee, String host){
         this.event = event;
+        this.priority = priority;
         this.date = date;
         this.invitee = invitee;
         this.host = host;
@@ -37,6 +39,11 @@ public class InviteClass implements Invite{
     @Override
     public String getStatus() {
         return status;
+    }
+
+    @Override
+    public String getPriority(){
+        return priority;
     }
 
     @Override

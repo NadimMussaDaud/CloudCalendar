@@ -1,7 +1,8 @@
+
 import java.time.LocalDateTime;
 import java.util.Iterator;
 
-public interface Account {
+public interface Account extends Comparable<Account>{
 
     String getName();
 

@@ -1,9 +1,10 @@
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class EventClass  implements Event{
+public class EventClass implements Event{
 
     private String name;
     private String priority;
@@ -39,8 +40,9 @@ public class EventClass  implements Event{
     public int getAccepts() {
         int count = 0;
         for (Invite invite : invitees) {
-            if(invite.getStatus().equals("accepted"))
+            if(invite.getStatus().equals("accepted")){
                 count++;
+            }
         }
         return count;
     }
@@ -48,8 +50,9 @@ public class EventClass  implements Event{
     public int getRejections() {
         int count = 0;
         for (Invite invite : invitees) {
-            if(invite.getStatus().equals("rejected"))
+            if(invite.getStatus().equals("rejected")){
                 count++;
+            }
         }
         return count;
     }
@@ -57,8 +60,9 @@ public class EventClass  implements Event{
     public int getUnanswered() {
         int count = 0;
         for (Invite invite : invitees) {
-            if(invite.getStatus().equals("unanswered"))
+            if(invite.getStatus().equals("unanswered")){
                 count++;
+            }
         }
         return count;
     }

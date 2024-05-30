@@ -1,0 +1,174 @@
+pam.beesly@dunder.mifflin.com was registered.
+michael.scott@dunder.mifflin.com was registered.
+david.wallace@dunder.mifflin.com was registered.
+bob.vance@vance.refrigeration.com was registered.
+dwight.schrute@dunder.mifflin.com was registered.
+andy.bernard@dunder.mifflin.com was registered.
+angela.martin@dunder.mifflin.com was registered.
+All accounts:
+andy.bernard@dunder.mifflin.com [staff]
+angela.martin@dunder.mifflin.com [staff]
+bob.vance@vance.refrigeration.com [guest]
+david.wallace@dunder.mifflin.com [manager]
+dwight.schrute@dunder.mifflin.com [staff]
+michael.scott@dunder.mifflin.com [manager]
+pam.beesly@dunder.mifflin.com [staff]
+Integration celebration is scheduled.
+Integration celebration occurs on 31-05-2024 17h:
+michael.scott@dunder.mifflin.com [accept]
+david.wallace@dunder.mifflin.com was invited.
+bob.vance@vance.refrigeration.com was invited.
+Integration celebration occurs on 31-05-2024 17h:
+michael.scott@dunder.mifflin.com [accept]
+david.wallace@dunder.mifflin.com [no_answer]
+bob.vance@vance.refrigeration.com [no_answer]
+The launch party is scheduled.
+andy.bernard@dunder.mifflin.com was invited.
+bob.vance@vance.refrigeration.com was invited.
+pam.beesly@dunder.mifflin.com was invited.
+dwight.schrute@dunder.mifflin.com was invited.
+david.wallace@dunder.mifflin.com was invited.
+The launch party occurs on 31-05-2024 17h:
+angela.martin@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [no_answer]
+bob.vance@vance.refrigeration.com [no_answer]
+pam.beesly@dunder.mifflin.com [no_answer]
+dwight.schrute@dunder.mifflin.com [no_answer]
+david.wallace@dunder.mifflin.com [no_answer]
+Another launch party is scheduled.
+The launch party occurs on 31-05-2024 17h:
+angela.martin@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [no_answer]
+bob.vance@vance.refrigeration.com [no_answer]
+pam.beesly@dunder.mifflin.com [no_answer]
+dwight.schrute@dunder.mifflin.com [no_answer]
+david.wallace@dunder.mifflin.com [reject]
+Account angela.martin@dunder.mifflin.com events:
+The launch party status [invited 6] [accepted 1] [rejected 1] [unanswered 4]
+andy.bernard@dunder.mifflin.com was invited.
+bob.vance@vance.refrigeration.com was invited.
+pam.beesly@dunder.mifflin.com was invited.
+Account michael.scott@dunder.mifflin.com already attending another event.
+dwight.schrute@dunder.mifflin.com was invited.
+Another launch party occurs on 31-05-2024 17h:
+david.wallace@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [no_answer]
+bob.vance@vance.refrigeration.com [no_answer]
+pam.beesly@dunder.mifflin.com [no_answer]
+dwight.schrute@dunder.mifflin.com [no_answer]
+Account david.wallace@dunder.mifflin.com events:
+Integration celebration status [invited 3] [accepted 1] [rejected 1] [unanswered 1]
+The launch party status [invited 6] [accepted 1] [rejected 1] [unanswered 4]
+Another launch party status [invited 5] [accepted 1] [rejected 0] [unanswered 4]
+Account bob.vance@vance.refrigeration.com has replied accept to the invitation.
+Integration celebration promoted by michael.scott@dunder.mifflin.com was rejected.
+Another launch party promoted by david.wallace@dunder.mifflin.com was rejected.
+Account pam.beesly@dunder.mifflin.com has replied accept to the invitation.
+Another launch party promoted by david.wallace@dunder.mifflin.com was rejected.
+Account andy.bernard@dunder.mifflin.com has replied reject to the invitation.
+Account andy.bernard@dunder.mifflin.com has replied reject to the invitation.
+Another launch party occurs on 31-05-2024 17h:
+david.wallace@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [reject]
+pam.beesly@dunder.mifflin.com [reject]
+dwight.schrute@dunder.mifflin.com [no_answer]
+The launch party occurs on 31-05-2024 17h:
+angela.martin@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [accept]
+pam.beesly@dunder.mifflin.com [accept]
+dwight.schrute@dunder.mifflin.com [no_answer]
+david.wallace@dunder.mifflin.com [reject]
+Integration celebration occurs on 31-05-2024 17h:
+michael.scott@dunder.mifflin.com [accept]
+david.wallace@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [reject]
+Koy pond is scheduled.
+Koy pond occurs on 28-07-2024 15h:
+michael.scott@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com was invited.
+Account andy.bernard@dunder.mifflin.com has replied reject to the invitation.
+bob.vance@vance.refrigeration.com was invited.
+pam.beesly@dunder.mifflin.com was invited.
+dwight.schrute@dunder.mifflin.com was invited.
+Koy pond occurs on 28-07-2024 15h:
+michael.scott@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [no_answer]
+pam.beesly@dunder.mifflin.com [no_answer]
+dwight.schrute@dunder.mifflin.com [no_answer]
+andy.bernard@dunder.mifflin.com accepted the invitation.
+Schrute farms event is scheduled.
+pam.beesly@dunder.mifflin.com was invited.
+bob.vance@vance.refrigeration.com was invited.
+Account bob.vance@vance.refrigeration.com has replied accept to the invitation.
+Koy pond promoted by michael.scott@dunder.mifflin.com was rejected.
+Schrute farms event occurs on 28-07-2024 15h:
+dwight.schrute@dunder.mifflin.com [accept]
+pam.beesly@dunder.mifflin.com [no_answer]
+bob.vance@vance.refrigeration.com [accept]
+super.manager@dunder.mifflin.com was registered.
+Some vip meeting is scheduled.
+Account bob.vance@vance.refrigeration.com already attending another event.
+Account bob.vance@vance.refrigeration.com is not on the invitation list.
+dwight.schrute@dunder.mifflin.com accepted the invitation.
+Schrute farms event promoted by dwight.schrute@dunder.mifflin.com was removed.
+Schrute farms event does not exist in account dwight.schrute@dunder.mifflin.com.
+Account bob.vance@vance.refrigeration.com events:
+Integration celebration status [invited 4] [accepted 2] [rejected 2] [unanswered 0]
+The launch party status [invited 6] [accepted 3] [rejected 2] [unanswered 1]
+Another launch party status [invited 5] [accepted 1] [rejected 3] [unanswered 1]
+Koy pond status [invited 5] [accepted 1] [rejected 3] [unanswered 1]
+pam.beesly@dunder.mifflin.com accepted the invitation.
+The launch party promoted by angela.martin@dunder.mifflin.com was rejected.
+Account pam.beesly@dunder.mifflin.com has already responded.
+Koy pond occurs on 28-07-2024 15h:
+michael.scott@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [reject]
+pam.beesly@dunder.mifflin.com [no_answer]
+dwight.schrute@dunder.mifflin.com [reject]
+Integration celebration occurs on 31-05-2024 17h:
+michael.scott@dunder.mifflin.com [accept]
+david.wallace@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [reject]
+andy.bernard@dunder.mifflin.com [accept]
+pam.beesly@dunder.mifflin.com [accept]
+Another launch party occurs on 31-05-2024 17h:
+david.wallace@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [reject]
+pam.beesly@dunder.mifflin.com [reject]
+dwight.schrute@dunder.mifflin.com [no_answer]
+The launch party occurs on 31-05-2024 17h:
+angela.martin@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [accept]
+pam.beesly@dunder.mifflin.com [reject]
+dwight.schrute@dunder.mifflin.com [no_answer]
+david.wallace@dunder.mifflin.com [reject]
+Some vip meeting occurs on 28-07-2024 15h:
+super.manager@dunder.mifflin.com [accept]
+dwight.schrute@dunder.mifflin.com [accept]
+Account grogu@mandalorian.com does not exist.
+Unknown event response.
+Integration celebration does not exist in account angela.martin@dunder.mifflin.com.
+meredith.palmer@dunder.mifflin.com was registered.
+Account meredith.palmer@dunder.mifflin.com is not on the invitation list.
+Account dwight.schrute@dunder.mifflin.com has replied accept to the invitation.
+The launch party promoted by angela.martin@dunder.mifflin.com was rejected.
+Another launch party occurs on 31-05-2024 17h:
+david.wallace@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [reject]
+pam.beesly@dunder.mifflin.com [reject]
+dwight.schrute@dunder.mifflin.com [accept]
+The launch party occurs on 31-05-2024 17h:
+angela.martin@dunder.mifflin.com [accept]
+andy.bernard@dunder.mifflin.com [reject]
+bob.vance@vance.refrigeration.com [accept]
+pam.beesly@dunder.mifflin.com [reject]
+dwight.schrute@dunder.mifflin.com [reject]
+david.wallace@dunder.mifflin.com [reject]
+Bye!

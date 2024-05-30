@@ -1,0 +1,20 @@
+No account registered.
+pam.beesly@dunder.mifflin.com was registered.
+michael.scott@dunder.mifflin.com was registered.
+bob.vance@vance.refrigeration.com was registered.
+All accounts:
+bob.vance@vance.refrigeration.com [guest]
+michael.scott@dunder.mifflin.com [manager]
+pam.beesly@dunder.mifflin.com [staff]
+Account pam.beesly@dunder.mifflin.com already exists.
+Unknown account type.
+andy.bernard@dunder.mifflin.com was registered.
+Account andy.bernard@dunder.mifflin.com already exists.
+Unknown account type.
+Account michael.scott@dunder.mifflin.com already exists.
+All accounts:
+andy.bernard@dunder.mifflin.com [staff]
+bob.vance@vance.refrigeration.com [guest]
+michael.scott@dunder.mifflin.com [manager]
+pam.beesly@dunder.mifflin.com [staff]
+Bye!

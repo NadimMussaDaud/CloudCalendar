@@ -1,0 +1,55 @@
+register pam.beesly@dunder.mifflin.com staff
+register michael.scott@dunder.mifflin.com manager
+register david.wallace@dunder.mifflin.com manager
+register bob.vance@vance.refrigeration.com guest
+register dwight.schrute@dunder.mifflin.com staff
+register andy.bernard@dunder.mifflin.com staff
+register angela.martin@dunder.mifflin.com staff
+accounts
+topics something
+create michael.scott@dunder.mifflin.com
+The launch party
+mid 2024 05 31 17
+website launch scranton
+topics website launch scranton
+create angela.martin@dunder.mifflin.com
+Another launch party
+mid 2024 05 31 17
+website launch boring
+topics website launch
+create andy.bernard@dunder.mifflin.com
+The launch party
+mid 2024 06 11 10
+website launch celebration
+topics website launch
+topics launch celebration
+topics celebration launch
+create michael.scott@dunder.mifflin.com
+Some meeting
+high 2024 04 28 14
+color scranton paper red blue
+create david.wallace@dunder.mifflin.com
+A very boring meeting
+mid 2024 04 28 15
+stamford paper green white color
+create dwight.schrute@dunder.mifflin.com
+A very boring meeting
+mid 2024 04 28 14
+stamford paper scranton red white color
+create andy.bernard@dunder.mifflin.com
+Yet another integration celebration
+mid 2024 04 28 14
+color paper blue white scranton
+topics scranton stamford
+topics stamford paper
+topics scranton paper
+topics scranton paper color red
+topics stamford paper blue color white
+topics scranton paper color red
+topics paper color white red blue green
+create andy.bernard@dunder.mifflin.com
+Yet another boring meeting
+mid 2024 05 28 14
+green blue paper color white red
+topics paper color white red blue green
+exit

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+
 import Exceptions.*;
 
 /**
@@ -13,14 +14,13 @@ import Exceptions.*;
 
 public class Main {
     
-    private static final String INVALID_COMMAND = "Invalid command.";
     private static final String AVAILABLE_COMMANDS = "Available commands:\n";
     private static final String HELP_MESSAGE_FORMAT = "%s - %s\n";
-    private static final String QUIT_MESSAGE = "Bye.";
+    private static final String QUIT_MESSAGE = "Bye!";
     private static final String ACCOUNT_REGISTERED_MESSAGE = "%s was registered.\n";
-    private static final String DUPLICATE_ACCOUTN_MESSAGE = "%s already exists.\n";
+    private static final String DUPLICATE_ACCOUTN_MESSAGE = "Account %s already exists.\n";
     private static final String NON_EXISTENT_TYPE_MESSAGE = "Unknown account type.\n";
-    private static final String NO_ACCOUNTS = "No accounts registered.\n";
+    private static final String NO_ACCOUNTS = "No account registered.\n";
     private static final String ALL_ACCOUNTS = "All accounts:\n";
     private static final String LIST_ACCOUNTS_FORMAT = "%s [%s]\n";
     private static final String NO_EXISTENT_ACCOUNT = "Account %s does not exist.\n";
@@ -35,7 +35,7 @@ public class Main {
     private static final String NO_EVENTS_ON_TOPICS = "No events on these topics.";
     private static final String EVENTS_ON_TOPICS_FORMAT = "%s promoted by %s on %s\n";
     private static final String EVENTS_ON_TOPICS = "Events on topics %s:\n";
-    private static final String NO_EVENT_IN_ACCOUNT = "%s does not exist in account %s\n";
+    private static final String NO_EVENT_IN_ACCOUNT = "%s does not exist in account %s.\n";
     private static final String NO_EVENTS = "Account %s has no events.\n";
     private static final String EVENT_INFO_FORMAT = "%s occurs on %s:\n";
     private static final String EVENT_INFO = "%s [%s]\n";
@@ -43,20 +43,12 @@ public class Main {
     private static final String NOT_IN_LIST = "Account %s is not on the invitation list.\n";
     private static final String ALREADY_RESPONDED = "Account %s has already responded.\n";
     private static final String INVITATION_RESPONSE = "Account %s has replied %s to the invitation.\n";
-    private static final String INVITATION_RESPONSE_FORMAT = "%s promoted by %s was rejected\n";
+    private static final String INVITATION_RESPONSE_FORMAT = "%s promoted by %s was rejected.\n";
     private static final String INVITATION_ACCEPTED = "%s accepted the invitation.\n";
     private static final String INVITED_MESSAGE = "%s was invited.\n";
     private static final String EVENT_REMOVED = "%s promoted by %s was removed.\n";
-    private static final String ALREADY_INVITED = "%s was already invited.\n";
-    private static final String IN_OTHER_EVENT = "%s is already attending another event.\n";
-    public static final String STAFF = "staff";
-    public static final String MANAGER = "manager";
-    public static final String GUEST = "guest";
-    public static final String HIGH = "high";
-    public static final String MID = "mid";
-    public static final String ACCEPT = "accept";
-    public static final String REJECT = "reject";
-    public static final String REJECTED = "rejected";
+    private static final String ALREADY_INVITED = "Account %s was already invited.\n";
+    private static final String IN_OTHER_EVENT = "Account %s already attending another event.\n";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH'h'");
 
     private static Calendar calendar;
@@ -75,11 +67,11 @@ public class Main {
             String input = in.next().trim().toUpperCase();
 
             command = parseCommand(input);
-            processCommand(command, in);
+            processCommand(command, in, input);
         } while (!command.equals(Commands.EXIT));
     }
 
-    private static void processCommand(Commands command, Scanner in) {
+    private static void processCommand(Commands command, Scanner in, String input) {
         switch (command) {
             case REGISTER -> register(in);
             case ACCOUNTS -> list();
@@ -91,7 +83,7 @@ public class Main {
             case TOPICS   -> topics(in);
             case HELP     -> help();
             case EXIT     -> exitMessage();
-            case UNKNOWN  -> invalidCommand();
+            case UNKNOWN  -> invalidCommand(input);
         }
     }
 
@@ -231,9 +223,7 @@ public class Main {
             }
         } catch (NonExistentAccountException e) {
             System.out.printf(NO_EXISTENT_ACCOUNT, accountName);
-        } catch (NoNewEventsException e){
-            System.out.printf(NO_NEW_EVENTS,accountName);
-        }
+        } 
     }
 
     private static void create(Scanner in) {
@@ -308,8 +298,9 @@ public class Main {
         }
     }
    
-    private static void invalidCommand() {
-        System.out.println(INVALID_COMMAND);
+    private static void invalidCommand(String unknown) {
+        Commands command = Commands.UNKNOWN;
+        System.out.printf("%s command %s. %s\n", command.getName(), unknown, command.getDescription());
     }
 
     private static void exitMessage() {

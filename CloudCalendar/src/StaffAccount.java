@@ -1,4 +1,6 @@
- public class StaffAccount extends AbstractAccount {
+import java.util.Iterator;
+
+public class StaffAccount extends AbstractAccount {
     
     public StaffAccount(String name) {
         super(name);
@@ -18,16 +20,26 @@
      */
     public Invite addInvite(Invite invite){
         Invite removed = null;
-        for (Invite inv : invites) {
-            if(inv.getDate().equals(invite.getDate()))
-                inv.reject();
-                if(inv.getHost().equals(invite.getInvitee()))
-                //remove invite
-                removed = inv;
-                invites.remove(inv);
-        }
-        invites.add(invite);
         
-       return removed;
+        if(invite.getPriority().equals("high")){
+            
+            Iterator<Invite> iterator = invites.iterator();
+            while (iterator.hasNext()) {
+                Invite inv = iterator.next();
+                
+                if (inv.getDate().equals(invite.getDate())) {
+  
+                    inv.reject();
+                    if (inv.getHost().equals(invite.getInvitee())) {
+                        // Remove invite
+                        removed = inv;
+                        invites.remove(inv); // Remove usando o iterador para evitar ConcurrentModificationException
+                    }
+                }
+            }
+        }
+    
+        invites.add(invite);
+        return removed;
     }
 }

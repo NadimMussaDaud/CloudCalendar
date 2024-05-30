@@ -1,3 +1,5 @@
+
+
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
@@ -13,7 +15,7 @@ public interface Calendar {
 
     void create(String accountName, String eventName, String priority, LocalDateTime date, List<String> topics) throws NonExistentAccountException, NonExistentPriorityException, NoNewEventsException, NoHighPriorityEventsException, DuplicateEventException, PromoterOccupiedException;
 
-    Iterator<Event> eventsFrom(String accountName) throws NonExistentAccountException, NoNewEventsException;
+    Iterator<Event> eventsFrom(String accountName) throws NonExistentAccountException;
 
     Iterator<Event> eventsByTopics(List<String> topics) throws NoEventsOnTopicsException;
 

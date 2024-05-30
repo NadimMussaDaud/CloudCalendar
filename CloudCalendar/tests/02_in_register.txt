@@ -1,0 +1,13 @@
+Accounts
+Register pam.beesly@dunder.mifflin.com staff
+register michael.scott@dunder.mifflin.com manager
+REGISTER bob.vance@vance.refrigeration.com guest
+ACCOUNTS
+register pam.beesly@dunder.mifflin.com manager
+register andy.bernard@dunder.mifflin.com cornell
+register andy.bernard@dunder.mifflin.com staff
+register andy.bernard@dunder.mifflin.com guest
+register alice@gmail.com boss
+register michael.scott@dunder.mifflin.com boss
+accounts
+Exit

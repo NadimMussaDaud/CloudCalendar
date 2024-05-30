@@ -1,3 +1,4 @@
+
 import java.time.LocalDateTime;
 
 public interface Invite {
@@ -6,6 +7,7 @@ public interface Invite {
     String getInvitee();
     String getHost();
     String getStatus();
+    String getPriority();
     void accept();
     void reject();
 }

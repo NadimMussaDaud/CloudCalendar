@@ -1,0 +1,48 @@
+Account grogu@mandalorian.com does not exist.
+pam.beesly@dunder.mifflin.com was registered.
+michael.scott@dunder.mifflin.com was registered.
+bob.vance@vance.refrigeration.com was registered.
+andy.bernard@dunder.mifflin.com was registered.
+angela.martin@dunder.mifflin.com was registered.
+All accounts:
+andy.bernard@dunder.mifflin.com [staff]
+angela.martin@dunder.mifflin.com [staff]
+bob.vance@vance.refrigeration.com [guest]
+michael.scott@dunder.mifflin.com [manager]
+pam.beesly@dunder.mifflin.com [staff]
+Account angela.martin@dunder.mifflin.com has no events.
+Account pam.beesly@dunder.mifflin.com has no events.
+Account bob.vance@vance.refrigeration.com has no events.
+Account michael.scott@dunder.mifflin.com has no events.
+Account andy.bernard@dunder.mifflin.com has no events.
+The launch party is scheduled.
+The launch party is scheduled.
+The launch party is scheduled.
+Integration celebration is scheduled.
+Account michael.scott@dunder.mifflin.com is busy.
+Account michael.scott@dunder.mifflin.com is busy.
+Account angela.martin@dunder.mifflin.com cannot create high priority events.
+Account grogu@mandalorian.com does not exist.
+Integration celebration already exists in account michael.scott@dunder.mifflin.com.
+Account michael.scott@dunder.mifflin.com is busy.
+Unknown priority type.
+Party planning committee meeting 08 is scheduled.
+Party planning committee meeting 09 is scheduled.
+Party planning committee meeting 10 is scheduled.
+Party planning committee meeting 11 is scheduled.
+Guest account bob.vance@vance.refrigeration.com cannot create events.
+Account Andy.Bernard@dunder.mifflin.com does not exist.
+Account pam.beesly@dunder.mifflin.com has no events.
+Account michael.scott@dunder.mifflin.com events:
+The launch party status [invited 1] [accepted 1] [rejected 0] [unanswered 0]
+Integration celebration status [invited 1] [accepted 1] [rejected 0] [unanswered 0]
+Account bob.vance@vance.refrigeration.com has no events.
+Account andy.bernard@dunder.mifflin.com events:
+The launch party status [invited 1] [accepted 1] [rejected 0] [unanswered 0]
+Account angela.martin@dunder.mifflin.com events:
+The launch party status [invited 1] [accepted 1] [rejected 0] [unanswered 0]
+Party planning committee meeting 08 status [invited 1] [accepted 1] [rejected 0] [unanswered 0]
+Party planning committee meeting 09 status [invited 1] [accepted 1] [rejected 0] [unanswered 0]
+Party planning committee meeting 10 status [invited 1] [accepted 1] [rejected 0] [unanswered 0]
+Party planning committee meeting 11 status [invited 1] [accepted 1] [rejected 0] [unanswered 0]
+Bye!
