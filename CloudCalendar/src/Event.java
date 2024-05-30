@@ -23,5 +23,5 @@ public interface Event {
      */
     boolean hasTopic(List<String> topics);
     boolean hasInvite(String invitee);
-    boolean hasResponded(String invitee);
+   // boolean hasResponded(String invitee);
 }

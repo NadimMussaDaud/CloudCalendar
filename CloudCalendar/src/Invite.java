@@ -10,4 +10,6 @@ public interface Invite {
     String getPriority();
     void accept();
     void reject();
+    void respond();
+    boolean hasResponded();
 }

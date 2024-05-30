@@ -66,7 +66,9 @@ public class CalendarClass implements Calendar{
 
     @Override
     public void create(String accountName, String eventName, String priority, LocalDateTime date, List<String> topics) throws NonExistentAccountException, NonExistentPriorityException, NoNewEventsException, NoHighPriorityEventsException , DuplicateEventException, PromoterOccupiedException {
-        if(!accounts.containsKey(accountName)) {
+        Account acc = accounts.get(accountName);
+
+        if(acc == null) {
             throw new NonExistentAccountException();
         }
         if(!isPriority(priority)) {
@@ -81,7 +83,8 @@ public class CalendarClass implements Calendar{
         if(hasEvent(accountName, eventName)) {
             throw new DuplicateEventException();
         }
-        if (!isAvailable(accountName, date)) {
+        //Nao tem nenhume evento nesta data
+        if (!acc.isAvailable(date)) {
             throw new PromoterOccupiedException();
         }
         Invite invite = new InviteClass(eventName, priority, date, accountName, accountName);
@@ -140,7 +143,7 @@ public class CalendarClass implements Calendar{
             throw new NoEventInAccountException();
         if(!events.get(event).hasInvite(invitee))
             throw new NotInInvitationListException();
-        if(events.get(event).hasResponded(invitee))
+        if(acc1.hasResponded(event))
             throw new AlreadyRespondedException();
 
         acc1.inviteResponse(event, response);
@@ -173,7 +176,8 @@ public class CalendarClass implements Calendar{
             throw new AlreadyInvitedException();
 
         Event e = events.get(event);
-        if(!acc1.isAvailable(e.getDate())) 
+        //não tem nenhum evento nesta data em que é o promotor
+        if(!acc1.isAvailable(e.getDate()) ) 
             throw new AttendingOtherEventException();
 
         // Adds the new invite. In case something is removed it returns a iterator for it,

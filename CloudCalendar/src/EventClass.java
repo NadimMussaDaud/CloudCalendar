@@ -95,6 +95,7 @@ public class EventClass implements Event{
         }
         return false;
     }
+    /* 
     @Override
     public boolean hasResponded(String invitee) {
         for (Invite invite : invitees) {
@@ -102,7 +103,7 @@ public class EventClass implements Event{
                 return !invite.getStatus().equals("unanswered");
         }
         return false;
-    }
+    }*/
    
     
 }

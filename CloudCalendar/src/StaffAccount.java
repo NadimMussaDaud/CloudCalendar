@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.Iterator;
 
 public class StaffAccount extends AbstractAccount {
@@ -9,6 +10,10 @@ public class StaffAccount extends AbstractAccount {
     @Override
     public String getType() {
         return "staff";
+    }
+
+    public boolean isAvailable(LocalDateTime date){
+        return invites.stream().noneMatch(invite -> invite.getDate().equals(date) && invite.getStatus().equals("accepted") && invite.getPriority().equals("high"));
     }
 
     /**
@@ -33,12 +38,14 @@ public class StaffAccount extends AbstractAccount {
                     if (inv.getHost().equals(invite.getInvitee())) {
                         // Remove invite
                         removed = inv;
-                        invites.remove(inv); // Remove usando o iterador para evitar ConcurrentModificationException
+                        //iterator.remove();
                     }
                 }
             }
+            invite.accept();
         }
     
+        invites.remove(removed);
         invites.add(invite);
         return removed;
     }

@@ -9,6 +9,7 @@ public class InviteClass implements Invite{
     
     private String event, priority, invitee, host, status;
     private LocalDateTime date;
+    private boolean responded;
 
     public InviteClass(String event, String priority, LocalDateTime date, String invitee, String host){
         this.event = event;
@@ -17,6 +18,7 @@ public class InviteClass implements Invite{
         this.invitee = invitee;
         this.host = host;
         this.status = UNANSWERED;
+        this.responded = false;
     }
     
     @Override
@@ -56,4 +58,14 @@ public class InviteClass implements Invite{
         status = REJECTED;
     }
     
+    @Override
+    public void respond(){
+        responded = true;
+    }
+
+    @Override
+    public boolean hasResponded(){
+        return responded;
+    }
+
 }

@@ -6,6 +6,10 @@ import java.util.List;
 
 abstract class AbstractAccount implements Account{
     
+
+    //TODO: Eliminar addEvent e deixar só addInvite
+    //TODO: isAvailable diferente aqui e em Staff. Tentar tornar igual
+
     private String name ;
     protected List<Invite> invites; // All events in which he is invited an others which he is hosting
 
@@ -28,11 +32,20 @@ abstract class AbstractAccount implements Account{
     /**
      * Method built with AI
      */
+    @Override
     public boolean isAvailable(LocalDateTime date){
-        return invites.stream().noneMatch(invite -> invite.getDate().equals(date) && invite.getHost().equals(this.name));
+        return invites.stream().noneMatch(invite -> invite.getDate().equals(date) && invite.getStatus().equals("accepted"));
     }
 
     public void addEvent(Invite invite) {
+       
+        //reject all the other that causes conflict
+        for (Invite inv : invites) {
+            if (inv.getDate().equals(invite.getDate())) {
+                inv.reject();
+            }
+        }
+
         invites.add(invite);
         if (invite.getHost().equals(this.name)) 
             invite.accept();
@@ -53,6 +66,7 @@ abstract class AbstractAccount implements Account{
     public void inviteResponse(String event, String response){
         for (Invite invite : invites) {
             if(invite.getEvent().equals(event)){
+                invite.respond();
                 if(response.equals("accept"))
                     invite.accept();
                 else 
@@ -72,6 +86,17 @@ abstract class AbstractAccount implements Account{
     public void removeInvite(Invite invite){
         invites.remove(invite);
     }
+
+
+    public boolean hasResponded(String invite){
+        for (Invite inv : invites) {
+            if (inv.getEvent().equals(invite)) {
+                return inv.hasResponded();
+            }
+        }
+        return false;
+    }
+
 
     @Override
     public int compareTo(Account other) {

@@ -130,7 +130,16 @@ public class Main {
             System.out.printf(EVENT_INFO_FORMAT, event, e.getDate().format(formatter));
             while (it.hasNext()) {
                 Invite i = it.next();
-                System.out.printf(EVENT_INFO, i.getInvitee(), i.getStatus());
+                
+                String status = "";
+                switch (i.getStatus()) {
+                    case "accepted" -> status = "accept";
+                    case "rejected" -> status = "reject";
+                    case "unanswered" -> status = "no_answer";
+                }
+
+
+                System.out.printf(EVENT_INFO, i.getInvitee(), status);
             }
         } catch (NonExistentAccountException e) {
             System.out.printf(NO_EXISTENT_ACCOUNT, promoter);        
@@ -142,13 +151,14 @@ public class Main {
     private static void response(Scanner in) {
         String invitee = in.nextLine().trim();
         String promoter = in.next();
-        String event = in.nextLine();
-        String response = in.nextLine();
+        String event = in.nextLine().trim();
+        String response = in.nextLine().trim();
 
         try {
             Iterator<Invite> it = calendar.response(invitee, promoter, event, response);
 
             System.out.printf(INVITATION_RESPONSE,invitee,response);
+            System.out.println("DEBUG "+event); //DEBUG
 
             while (it.hasNext()) {
                 Invite invite = it.next();
@@ -185,7 +195,7 @@ public class Main {
                     Invite invite = it.next();
 
                     if(invite.getHost().equals(invitee)) 
-                        System.out.printf(EVENT_REMOVED, event, invitee);
+                        System.out.printf(EVENT_REMOVED, invite.getEvent(), invitee);
                     else
                         System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
                 }
