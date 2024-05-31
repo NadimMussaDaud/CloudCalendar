@@ -44,6 +44,7 @@ abstract class AbstractAccount implements Account{
         for (Invite inv : invites) {
             if (inv.getDate().equals(invite.getDate())) {
                 inv.reject();
+                inv.respond(); // ADDED
             }
         }
         invites.add(invite);

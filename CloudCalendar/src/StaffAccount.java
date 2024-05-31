@@ -34,7 +34,8 @@ public class StaffAccount extends AbstractAccount {
             while (iterator.hasNext()) {
                 Invite inv = iterator.next();
                 
-                if (inv.getDate().equals(invite.getDate()) && ( !inv.hasResponded() || !inv.getStatus().equals("rejected"))) {
+                //inv.getDate().equals(invite.getDate()) && ( !inv.getStatus().equals("rejected"))
+                if (inv.getDate().equals(invite.getDate()) && (!inv.getStatus().equals("rejected"))) {
   
                     inv.reject();
                     rejected.add(inv);
@@ -47,10 +48,15 @@ public class StaffAccount extends AbstractAccount {
                 }
             }
             invite.accept();
+            invite.respond();//added
+            if(rejected.isEmpty())
+                rejected.add(invite); //IMPORTANTTTTTTTTTTTTTTTTTTTTTTT
         }
     
         invites.remove(removed);
         invites.add(invite);
+
+        
         return rejected.iterator();
     }
 }

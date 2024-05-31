@@ -188,20 +188,66 @@ public class Main {
         String event = in.nextLine().trim();
 
         try {
+
+            //DEBUG
+            /*if(invitee.equals("pam.beesly@dunder.mifflin.com")){
+                
+                Iterator<Event> it = calendar.eventsFrom(invitee);
+                if(it.hasNext()){
+                    System.out.printf(EVENTS_FORMAT, invitee);
+                    while(it.hasNext()){
+                        Event eventDEBUG = it.next();
+                        Iterator<Invite> it2 = eventDEBUG.getInvitees();
+    
+                            System.out.printf(EVENT_INFO_FORMAT, event, eventDEBUG.getDate().format(formatter));
+                            while (it2.hasNext()) {
+                                Invite i = it2.next();
+                                
+                                String status = "";
+                                switch (i.getStatus()) {
+                                    case "accepted" -> status = "accept";
+                                    case "rejected" -> status = "reject";
+                                    case "unanswered" -> status = "no_answer";
+                                }
+
+
+                                System.out.printf(EVENT_INFO, i.getInvitee(), status);
+                            }
+                    }
+                }
+            }*/
+            //ENDS HERE
+
+
             Iterator<Invite> it = calendar.invite(invitee,promoter,event);
+            Invite invite = null;
 
             if(it.hasNext()){
-                System.out.printf(INVITATION_ACCEPTED, invitee);
+                invite = it.next();
 
-                while (it.hasNext()) {
-                    Invite invite = it.next();
+                if(invite.getHost().equals(promoter) && invite.getInvitee().equals(invitee) && invite.getEvent().equals(event)){
+                    System.out.printf(INVITATION_ACCEPTED, invitee);
+                }else{
+                    System.out.printf(INVITATION_ACCEPTED, invitee);
 
                     if(invite.getHost().equals(invitee)) 
                         System.out.printf(EVENT_REMOVED, invite.getEvent(), invitee);
                     else{
-                        if (!invite.hasResponded()) 
-                            System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
-                        }
+                        //if (!invite.hasResponded()) //
+                        System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
+                    } 
+                }
+
+                
+                while (it.hasNext()) {
+                    invite = it.next();
+
+                        if(invite.getHost().equals(invitee)) 
+                            System.out.printf(EVENT_REMOVED, invite.getEvent(), invitee);
+                        else{
+                            if (!invite.hasResponded()) 
+                                System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
+                        } 
                 }
             }else{
                 System.out.printf(INVITED_MESSAGE, invitee);

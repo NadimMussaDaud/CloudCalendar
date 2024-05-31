@@ -11,6 +11,11 @@ import java.util.Objects;
 
 import Exceptions.*;
 
+
+//TODO: Ao criar evento rejeitar todos outros que são a mesma hora
+//TODO: Se ele estiver vazio então "was invited", se estiver cheio "proceder normalmente", "se tiver um elemento" e for o próprio convite
+//"was accepted"
+
 public class CalendarClass implements Calendar{
     
     private static final String STAFF = "staff";
