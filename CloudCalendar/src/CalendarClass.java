@@ -12,10 +12,6 @@ import java.util.Objects;
 import Exceptions.*;
 
 
-//TODO: Ao criar evento rejeitar todos outros que são a mesma hora
-//TODO: Se ele estiver vazio então "was invited", se estiver cheio "proceder normalmente", "se tiver um elemento" e for o próprio convite
-//"was accepted"
-
 public class CalendarClass implements Calendar{
     
     private static final String STAFF = "staff";
@@ -25,7 +21,6 @@ public class CalendarClass implements Calendar{
     private static final String MID = "mid";
     private static final String ACCEPT = "accept";
     private static final String REJECT = "reject";
-    private static final String REJECTED = "rejected";
 
     private Map<String, Account> accounts;
     private Map<Integer, Event> events; // A key its an Hash between promoter and event name
@@ -90,7 +85,7 @@ public class CalendarClass implements Calendar{
             throw new DuplicateEventException();
         }
 
-        if (!acc.isAvailable(date)) {
+        if (!isAvailable(accountName, date)) {
             throw new PromoterOccupiedException();
         }
         Invite invite = new InviteClass(eventName, priority, date, accountName, accountName);
@@ -127,7 +122,8 @@ public class CalendarClass implements Calendar{
             }
         }
 
-        if(eventsWithTopics.isEmpty()) throw new NoEventsOnTopicsException();
+        if(eventsWithTopics.isEmpty()) 
+            throw new NoEventsOnTopicsException();
 
         //Comparator provided by AI
         Collections.sort(eventsWithTopics, new Comparator<Event>() {
@@ -151,18 +147,6 @@ public class CalendarClass implements Calendar{
 
         return eventsWithTopics.iterator();
     }
-
-private int getCommonTopicsCount(Event event, List<String> topics) {
-    int count = 0;
-    for (String topic : topics) {
-        List<String> list = new ArrayList<>();
-        list.add(topic);
-        if (event.hasTopic(list)) {
-            count++;
-        }
-    }
-    return count;
-}
  
     @Override
     public Event getEvent(String promoter, String event) throws NonExistentAccountException, NoEventInAccountException{
@@ -174,7 +158,6 @@ private int getCommonTopicsCount(Event event, List<String> topics) {
             throw new NoEventInAccountException();
         
         int key = Objects.hash(event,promoter);
-
         return events.get(key);
     }
 
@@ -194,20 +177,11 @@ private int getCommonTopicsCount(Event event, List<String> topics) {
         int key = Objects.hash(event,promoter);    
         if(!events.get(key).hasInvite(invitee))
             throw new NotInInvitationListException();
+
         if(acc1.hasResponded(event))
             throw new AlreadyRespondedException();
 
         return acc1.inviteResponse(event, response);
-
-        /*Iterator<Invite> it = acc1.getEvents(); 
-        List<Invite> rejected = new ArrayList<>();
-        while (it.hasNext()) {
-            Invite invite = it.next();
-            if(invite.getStatus().equals(REJECTED) && !invite.hasResponded())
-                rejected.add(invite);
-        }
-
-        return rejected.iterator();*/
     }
 
     @Override
@@ -228,44 +202,39 @@ private int getCommonTopicsCount(Event event, List<String> topics) {
 
         int key = Objects.hash(event,promoter);    
         Event e = events.get(key);
-        //não tem nenhum evento nesta data em que é o promotor
-        if(!acc1.isAvailable(e.getDate()) ) 
+        if(!isAvailable(invitee, e.getDate())) 
             throw new AttendingOtherEventException();
 
         // Adds the new invite. In case something is removed it returns a iterator for it,
         // Otherwise gets the rejected invites in case it's a staff member
-        List<Invite> oldInvites = new ArrayList<>();
         
         Invite newInvite = new InviteClass(event, e.getPriority(), e.getDate(), invitee, promoter);
         e.addInvitee(newInvite);
-        
-        // TODO: Se evento não for HIGH então só adicionar, se for adicionar e rejeitar os outros 
+
+        //Saves the old invites because we need to perform more than one operation
+        List<Invite> oldInvites = new ArrayList<>();
         Iterator<Invite> removed = acc1.addInvite(newInvite);
         while (removed.hasNext()) {
             oldInvites.add(removed.next());
         }
-        /*if(removed == null && acc1.getType().equals(STAFF) && e.getPriority().equals(HIGH)){
-            Iterator<Invite> it = acc1.getEvents();
-            while (it.hasNext()) {
-                Invite invite = it.next();
-                if(invite.getStatus().equals(REJECTED))
-                    oldInvites.add(invite);
-            }
-        }else */
+        
         if(acc1.getType().equals(STAFF) && e.getPriority().equals(HIGH)){
-            //oldInvites.add(removed);
-            for (Invite invite : oldInvites) {
-                
-                if(invite.getHost().equals(invitee)){
-                    key = Objects.hash(invite.getEvent(),invitee);    
-                    events.remove(key);
-                    for (Account acc : accounts.values()) 
-                        acc.removeInvite(invite);
-                }
-            }
+            removeOldInvites(oldInvites, invitee);
         }
 
         return oldInvites.iterator();
+    }
+
+    private void removeOldInvites(List<Invite> oldInvites, String invitee){
+        for (Invite invite : oldInvites) {
+                
+            if(invite.getHost().equals(invitee)){
+                int key = Objects.hash(invite.getEvent(),invitee);    
+                events.remove(key);
+                for (Account acc : accounts.values()) 
+                    acc.removeInvite(invite);
+            }
+        }
     }
 
     private boolean isResponse(String response) {
@@ -286,6 +255,19 @@ private int getCommonTopicsCount(Event event, List<String> topics) {
 
     private boolean isType(String type) {
         return (type.equals(STAFF) || type.equals(MANAGER) || type.equals(GUEST));
+    }
+
+
+    private int getCommonTopicsCount(Event event, List<String> topics) {
+        int count = 0;
+        for (String topic : topics) {
+            List<String> list = new ArrayList<>();
+            list.add(topic);
+            if (event.hasTopic(list)) {
+                count++;
+            }
+        }
+        return count;
     }
 }
 

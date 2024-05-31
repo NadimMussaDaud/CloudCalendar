@@ -15,6 +15,7 @@ import Exceptions.*;
 public class Main {
     
     private static final String AVAILABLE_COMMANDS = "Available commands:\n";
+    private static final String INVALID_COMMAND = "%s command %s. %s\n";
     private static final String HELP_MESSAGE_FORMAT = "%s - %s\n";
     private static final String QUIT_MESSAGE = "Bye!";
     private static final String ACCOUNT_REGISTERED_MESSAGE = "%s was registered.\n";
@@ -139,7 +140,6 @@ public class Main {
                     case "unanswered" -> status = "no_answer";
                 }
 
-
                 System.out.printf(EVENT_INFO, i.getInvitee(), status);
             }
         } catch (NonExistentAccountException e) {
@@ -160,7 +160,7 @@ public class Main {
 
             System.out.printf(INVITATION_RESPONSE,invitee,response);
 
-            if(response.equals("accept")){
+            if(it.hasNext()){
                 while (it.hasNext()) {
                     Invite invite = it.next();
                     System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
@@ -187,38 +187,7 @@ public class Main {
         String promoter = in.next();
         String event = in.nextLine().trim();
 
-        try {
-
-            //DEBUG
-            /*if(invitee.equals("pam.beesly@dunder.mifflin.com")){
-                
-                Iterator<Event> it = calendar.eventsFrom(invitee);
-                if(it.hasNext()){
-                    System.out.printf(EVENTS_FORMAT, invitee);
-                    while(it.hasNext()){
-                        Event eventDEBUG = it.next();
-                        Iterator<Invite> it2 = eventDEBUG.getInvitees();
-    
-                            System.out.printf(EVENT_INFO_FORMAT, event, eventDEBUG.getDate().format(formatter));
-                            while (it2.hasNext()) {
-                                Invite i = it2.next();
-                                
-                                String status = "";
-                                switch (i.getStatus()) {
-                                    case "accepted" -> status = "accept";
-                                    case "rejected" -> status = "reject";
-                                    case "unanswered" -> status = "no_answer";
-                                }
-
-
-                                System.out.printf(EVENT_INFO, i.getInvitee(), status);
-                            }
-                    }
-                }
-            }*/
-            //ENDS HERE
-
-
+        try { 
             Iterator<Invite> it = calendar.invite(invitee,promoter,event);
             Invite invite = null;
 
@@ -233,12 +202,10 @@ public class Main {
                     if(invite.getHost().equals(invitee)) 
                         System.out.printf(EVENT_REMOVED, invite.getEvent(), invitee);
                     else{
-                        //if (!invite.hasResponded()) //
                         System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
                     } 
                 }
-
-                
+  
                 while (it.hasNext()) {
                     invite = it.next();
 
@@ -360,7 +327,7 @@ public class Main {
    
     private static void invalidCommand(String unknown) {
         Commands command = Commands.UNKNOWN;
-        System.out.printf("%s command %s. %s\n", command.getName(), unknown, command.getDescription());
+        System.out.printf(INVALID_COMMAND, command.getName(), unknown, command.getDescription());
     }
 
     private static void exitMessage() {

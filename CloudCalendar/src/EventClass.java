@@ -13,6 +13,11 @@ public class EventClass implements Event{
     private List<String> topics;
     private List<Invite> invitees;
 
+    private final String REJECTED = "rejected";
+    private final String ACCEPTED = "accepted";
+    private final String UNANSWERED = "unanswered";
+
+
     public EventClass(String host, String name, String priority, LocalDateTime date, List<String> topics) {
         this.name = name;
         this.priority = priority;
@@ -40,7 +45,7 @@ public class EventClass implements Event{
     public int getAccepts() {
         int count = 0;
         for (Invite invite : invitees) {
-            if(invite.getStatus().equals("accepted")){
+            if(invite.getStatus().equals(ACCEPTED)){
                 count++;
             }
         }
@@ -50,7 +55,7 @@ public class EventClass implements Event{
     public int getRejections() {
         int count = 0;
         for (Invite invite : invitees) {
-            if(invite.getStatus().equals("rejected")){
+            if(invite.getStatus().equals(REJECTED)){
                 count++;
             }
         }
@@ -60,7 +65,7 @@ public class EventClass implements Event{
     public int getUnanswered() {
         int count = 0;
         for (Invite invite : invitees) {
-            if(invite.getStatus().equals("unanswered")){
+            if(invite.getStatus().equals(UNANSWERED)){
                 count++;
             }
         }
@@ -95,15 +100,4 @@ public class EventClass implements Event{
         }
         return false;
     }
-    /* 
-    @Override
-    public boolean hasResponded(String invitee) {
-        for (Invite invite : invitees) {
-            if(invite.getInvitee().equals(invitee))
-                return !invite.getStatus().equals("unanswered");
-        }
-        return false;
-    }*/
-   
-    
 }

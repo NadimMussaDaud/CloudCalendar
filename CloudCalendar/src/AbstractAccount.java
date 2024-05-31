@@ -7,10 +7,6 @@ import java.util.List;
 
 abstract class AbstractAccount implements Account{
     
-
-    //TODO: Eliminar addEvent e deixar só addInvite
-    //TODO: isAvailable diferente aqui e em Staff. Tentar tornar igual
-
     private String name ;
     protected List<Invite> invites; // All events in which he is invited an others which he is hosting
 
@@ -39,12 +35,11 @@ abstract class AbstractAccount implements Account{
     }
 
     public void addEvent(Invite invite) {
-       
         //reject all the other that causes conflict
         for (Invite inv : invites) {
             if (inv.getDate().equals(invite.getDate())) {
                 inv.reject();
-                inv.respond(); // ADDED
+                inv.respond(); 
             }
         }
         invites.add(invite);
@@ -74,7 +69,7 @@ abstract class AbstractAccount implements Account{
                 else 
                     invite.reject();
             }
-            else {
+            else if(response.equals("accept")){
                 //Reject all the others
                 if(!invite.getStatus().equals("rejected") && !invite.hasResponded()){
                     invite.reject();

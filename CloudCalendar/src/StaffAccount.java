@@ -21,9 +21,8 @@ public class StaffAccount extends AbstractAccount {
     /**
      * 
      * @param invite to be added
-     * @return an invite in case it was removed or null    otherwise. Always adds the invite.
+     * @return an invite in case it was removed or null otherwise. Always adds the invite.
      * 
-     TODO: Remove event in CalendarClass
      */
     public Iterator<Invite> addInvite(Invite invite){
         Invite removed = null;
@@ -34,7 +33,6 @@ public class StaffAccount extends AbstractAccount {
             while (iterator.hasNext()) {
                 Invite inv = iterator.next();
                 
-                //inv.getDate().equals(invite.getDate()) && ( !inv.getStatus().equals("rejected"))
                 if (inv.getDate().equals(invite.getDate()) && (!inv.getStatus().equals("rejected"))) {
   
                     inv.reject();
@@ -43,16 +41,14 @@ public class StaffAccount extends AbstractAccount {
                     if (inv.getHost().equals(invite.getInvitee())) {
                         // Remove invite
                         removed = inv;
-                        //iterator.remove();
                     }
                 }
             }
             invite.accept();
-            invite.respond();//added
+            invite.respond();
             if(rejected.isEmpty())
-                rejected.add(invite); //IMPORTANTTTTTTTTTTTTTTTTTTTTTTT
+                rejected.add(invite); 
         }
-    
         invites.remove(removed);
         invites.add(invite);
 
