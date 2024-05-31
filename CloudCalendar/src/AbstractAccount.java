@@ -1,6 +1,7 @@
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,7 +46,6 @@ abstract class AbstractAccount implements Account{
                 inv.reject();
             }
         }
-
         invites.add(invite);
         if (invite.getHost().equals(this.name)) 
             invite.accept();
@@ -63,7 +63,8 @@ abstract class AbstractAccount implements Account{
         return null;
     }
 
-    public void inviteResponse(String event, String response){
+    public Iterator<Invite> inviteResponse(String event, String response){
+        List<Invite> responses = new ArrayList<>();
         for (Invite invite : invites) {
             if(invite.getEvent().equals(event)){
                 invite.respond();
@@ -74,17 +75,27 @@ abstract class AbstractAccount implements Account{
             }
             else {
                 //Reject all the others
-                invite.reject();
+                if(!invite.getStatus().equals("rejected") && !invite.hasResponded()){
+                    invite.reject();
+                    responses.add(invite);
+                }
+                    
             }
         }
+        return responses.iterator();
     }
-    public Invite addInvite(Invite invite){
+    public Iterator<Invite> addInvite(Invite invite){
         invites.add(invite);
-        return null;
+        return Collections.emptyIterator();
     }
 
     public void removeInvite(Invite invite){
-        invites.remove(invite);
+        Invite remove = null;
+        for (Invite inv : invites) {
+            if(invite.getEvent().equals(inv.getEvent()))
+                remove = inv;
+        }
+        invites.remove(remove);
     }
 
 

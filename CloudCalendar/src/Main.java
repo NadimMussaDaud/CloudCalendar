@@ -32,7 +32,7 @@ public class Main {
     private static final String SCHEDULED_EVENT = "%s is scheduled.\n";
     private static final String EVENTS_FORMAT = "Account %s events:\n";
     private static final String EVENTS_ACCOUNTS_FORMAT = "%s status [invited %d] [accepted %d] [rejected %d] [unanswered %d]\n";
-    private static final String NO_EVENTS_ON_TOPICS = "No events on these topics.";
+    private static final String NO_EVENTS_ON_TOPICS = "No events on those topics.\n";
     private static final String EVENTS_ON_TOPICS_FORMAT = "%s promoted by %s on %s\n";
     private static final String EVENTS_ON_TOPICS = "Events on topics %s:\n";
     private static final String NO_EVENT_IN_ACCOUNT = "%s does not exist in account %s.\n";
@@ -105,14 +105,15 @@ public class Main {
 
         try{
             Iterator<Event> it = calendar.eventsByTopics(topics);
+            if(it.hasNext()){
+                System.out.printf(EVENTS_ON_TOPICS, String.join(" ", topics));
+                while(it.hasNext()){
+                    Event event = it.next();
+                    List<String> eventTopics = new ArrayList<>();
+                    event.getTopics().forEachRemaining(eventTopics :: add);
 
-            System.out.printf(EVENTS_ON_TOPICS, String.join(" ", topics));
-            while(it.hasNext()){
-                Event event = it.next();
-                List<String> eventTopics = new ArrayList<>();
-                event.getTopics().forEachRemaining(eventTopics :: add);
-
-                System.out.printf(EVENTS_ON_TOPICS_FORMAT,event.getName(),event.getHost(), String.join(" ", eventTopics) );
+                    System.out.printf(EVENTS_ON_TOPICS_FORMAT,event.getName(),event.getHost(), String.join(" ", eventTopics) );
+                }
             }
         }catch(NoEventsOnTopicsException e){
             System.out.printf(NO_EVENTS_ON_TOPICS);
@@ -158,11 +159,12 @@ public class Main {
             Iterator<Invite> it = calendar.response(invitee, promoter, event, response);
 
             System.out.printf(INVITATION_RESPONSE,invitee,response);
-            System.out.println("DEBUG "+event); //DEBUG
 
-            while (it.hasNext()) {
-                Invite invite = it.next();
-                System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
+            if(response.equals("accept")){
+                while (it.hasNext()) {
+                    Invite invite = it.next();
+                    System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
+                }
             }
 
 
@@ -196,8 +198,10 @@ public class Main {
 
                     if(invite.getHost().equals(invitee)) 
                         System.out.printf(EVENT_REMOVED, invite.getEvent(), invitee);
-                    else
-                        System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
+                    else{
+                        if (!invite.hasResponded()) 
+                            System.out.printf(INVITATION_RESPONSE_FORMAT, invite.getEvent(), invite.getHost());
+                        }
                 }
             }else{
                 System.out.printf(INVITED_MESSAGE, invitee);

@@ -2,11 +2,12 @@
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Objects;
 
 import Exceptions.*;
 
@@ -22,7 +23,7 @@ public class CalendarClass implements Calendar{
     private static final String REJECTED = "rejected";
 
     private Map<String, Account> accounts;
-    private Map<String, Event> events; 
+    private Map<Integer, Event> events; // A key its an Hash between promoter and event name
 
     public CalendarClass(){
         this.accounts = new HashMap<>();
@@ -83,14 +84,16 @@ public class CalendarClass implements Calendar{
         if(hasEvent(accountName, eventName)) {
             throw new DuplicateEventException();
         }
-        //Nao tem nenhume evento nesta data
+
         if (!acc.isAvailable(date)) {
             throw new PromoterOccupiedException();
         }
         Invite invite = new InviteClass(eventName, priority, date, accountName, accountName);
         accounts.get(accountName).addEvent( invite );
-        events.put(eventName, new EventClass(accountName, eventName, priority, date, topics));
-        events.get(eventName).addInvitee(invite);        
+
+        int eventKey = Objects.hash(eventName, accountName);
+        events.put(eventKey, new EventClass(accountName, eventName, priority, date, topics));
+        events.get(eventKey).addInvitee(invite);        
     }
 
     @Override
@@ -101,21 +104,60 @@ public class CalendarClass implements Calendar{
         
         Iterator<Invite> it = acc.getEvents();
         List<Event> events = new ArrayList<>();
-        while(it.hasNext())
-            events.add(this.events.get(it.next().getEvent()));
+        while(it.hasNext()){
+            Invite inv = it.next();
+            int key = Objects.hash(inv.getEvent(), inv.getHost());
+            events.add(this.events.get(key));
+        }
 
         return events.iterator();
     }
 
     @Override
-    public Iterator<Event> eventsByTopics(List<String> topics) {
-        List<Event> events = new ArrayList<>();
-        for (Event e : this.events.values()) {
-            if(e.hasTopic(topics))
-                events.add(e);
+    public Iterator<Event> eventsByTopics(List<String> topics) throws NoEventsOnTopicsException {
+        List<Event> eventsWithTopics = new ArrayList<>();
+        for (Event event : events.values()) {
+            if (event.hasTopic(topics)) {
+                eventsWithTopics.add(event);
+            }
         }
-        return events.iterator();
+
+        if(eventsWithTopics.isEmpty()) throw new NoEventsOnTopicsException();
+
+        //Comparator provided by AI
+        Collections.sort(eventsWithTopics, new Comparator<Event>() {
+            @Override
+            public int compare(Event e1, Event e2) {
+                int commonTopicsCount1 = getCommonTopicsCount(e1, topics);
+                int commonTopicsCount2 = getCommonTopicsCount(e2, topics);
+
+                if (commonTopicsCount1 != commonTopicsCount2) {
+                    return Integer.compare(commonTopicsCount2, commonTopicsCount1); // Descending order
+                } else {
+                    int eventDescriptionCompare = e1.getName().compareTo(e2.getName());
+                    if (eventDescriptionCompare != 0) {
+                        return eventDescriptionCompare;
+                    } else {
+                        return e1.getHost().compareTo(e2.getHost());
+                    }
+                }
+            }
+        });
+
+        return eventsWithTopics.iterator();
     }
+
+private int getCommonTopicsCount(Event event, List<String> topics) {
+    int count = 0;
+    for (String topic : topics) {
+        List<String> list = new ArrayList<>();
+        list.add(topic);
+        if (event.hasTopic(list)) {
+            count++;
+        }
+    }
+    return count;
+}
  
     @Override
     public Event getEvent(String promoter, String event) throws NonExistentAccountException, NoEventInAccountException{
@@ -126,7 +168,9 @@ public class CalendarClass implements Calendar{
         if (!hasEvent(promoter, event))
             throw new NoEventInAccountException();
         
-        return events.get(event);
+        int key = Objects.hash(event,promoter);
+
+        return events.get(key);
     }
 
     @Override
@@ -141,22 +185,24 @@ public class CalendarClass implements Calendar{
             throw new UnknownResponseException();
         if (!hasEvent(promoter, event))
             throw new NoEventInAccountException();
-        if(!events.get(event).hasInvite(invitee))
+
+        int key = Objects.hash(event,promoter);    
+        if(!events.get(key).hasInvite(invitee))
             throw new NotInInvitationListException();
         if(acc1.hasResponded(event))
             throw new AlreadyRespondedException();
 
-        acc1.inviteResponse(event, response);
+        return acc1.inviteResponse(event, response);
 
-        Iterator<Invite> it = acc1.getEvents(); 
+        /*Iterator<Invite> it = acc1.getEvents(); 
         List<Invite> rejected = new ArrayList<>();
         while (it.hasNext()) {
             Invite invite = it.next();
-            if(invite.getStatus().equals(REJECTED))
+            if(invite.getStatus().equals(REJECTED) && !invite.hasResponded())
                 rejected.add(invite);
         }
 
-        return rejected.iterator();
+        return rejected.iterator();*/
     }
 
     @Override
@@ -175,7 +221,8 @@ public class CalendarClass implements Calendar{
         if(acc1.hasEvent(event))
             throw new AlreadyInvitedException();
 
-        Event e = events.get(event);
+        int key = Objects.hash(event,promoter);    
+        Event e = events.get(key);
         //não tem nenhum evento nesta data em que é o promotor
         if(!acc1.isAvailable(e.getDate()) ) 
             throw new AttendingOtherEventException();
@@ -188,20 +235,29 @@ public class CalendarClass implements Calendar{
         e.addInvitee(newInvite);
         
         // TODO: Se evento não for HIGH então só adicionar, se for adicionar e rejeitar os outros 
-        Invite removed = acc1.addInvite(newInvite);
-
-        if(removed == null && acc1.getType().equals(STAFF) && e.getPriority().equals(HIGH)){
+        Iterator<Invite> removed = acc1.addInvite(newInvite);
+        while (removed.hasNext()) {
+            oldInvites.add(removed.next());
+        }
+        /*if(removed == null && acc1.getType().equals(STAFF) && e.getPriority().equals(HIGH)){
             Iterator<Invite> it = acc1.getEvents();
             while (it.hasNext()) {
                 Invite invite = it.next();
                 if(invite.getStatus().equals(REJECTED))
                     oldInvites.add(invite);
             }
-        }else if(acc1.getType().equals(STAFF) && e.getPriority().equals(HIGH)){
-            oldInvites.add(removed);
-            events.remove(removed.getEvent());
-            for (Account acc : accounts.values()) 
-                acc.removeInvite(removed);
+        }else */
+        if(acc1.getType().equals(STAFF) && e.getPriority().equals(HIGH)){
+            //oldInvites.add(removed);
+            for (Invite invite : oldInvites) {
+                
+                if(invite.getHost().equals(invitee)){
+                    key = Objects.hash(invite.getEvent(),invitee);    
+                    events.remove(key);
+                    for (Account acc : accounts.values()) 
+                        acc.removeInvite(invite);
+                }
+            }
         }
 
         return oldInvites.iterator();

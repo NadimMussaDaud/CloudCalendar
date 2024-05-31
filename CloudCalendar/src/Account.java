@@ -11,8 +11,8 @@ public interface Account extends Comparable<Account>{
     void addEvent(Invite invite);
     Iterator<Invite> getEvents();
     String getStatus(String event);
-    Invite addInvite(Invite invite);
-    void inviteResponse(String event, String response);
+    Iterator<Invite> addInvite(Invite invite);
+    Iterator<Invite> inviteResponse(String event, String response);
     void removeInvite(Invite invite);
     boolean hasResponded(String invite);
 }

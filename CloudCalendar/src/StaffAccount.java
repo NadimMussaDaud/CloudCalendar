@@ -1,5 +1,7 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class StaffAccount extends AbstractAccount {
     
@@ -23,18 +25,20 @@ public class StaffAccount extends AbstractAccount {
      * 
      TODO: Remove event in CalendarClass
      */
-    public Invite addInvite(Invite invite){
+    public Iterator<Invite> addInvite(Invite invite){
         Invite removed = null;
-        
+        List<Invite> rejected = new ArrayList<>();
         if(invite.getPriority().equals("high")){
             
             Iterator<Invite> iterator = invites.iterator();
             while (iterator.hasNext()) {
                 Invite inv = iterator.next();
                 
-                if (inv.getDate().equals(invite.getDate())) {
+                if (inv.getDate().equals(invite.getDate()) && ( !inv.hasResponded() || !inv.getStatus().equals("rejected"))) {
   
                     inv.reject();
+                    rejected.add(inv);
+
                     if (inv.getHost().equals(invite.getInvitee())) {
                         // Remove invite
                         removed = inv;
@@ -47,6 +51,6 @@ public class StaffAccount extends AbstractAccount {
     
         invites.remove(removed);
         invites.add(invite);
-        return removed;
+        return rejected.iterator();
     }
 }
