@@ -43,7 +43,3 @@ invite jane.smith@example.com john.doe@example.com "Team Meeting"
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-Feel free to customize this README template with your specific repository details, such as the GitHub URL, and any other additional information you'd like to showcase.
