@@ -1,6 +1,3 @@
-To create a professional README for your GitHub project, I will need to incorporate important details that potential employers or collaborators will find relevant. Below is a template that will help you showcase your project in the best light:
-
----
 
 # Office Calendar - Cloud-based Calendar Management System
 
